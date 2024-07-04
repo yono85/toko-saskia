@@ -61,7 +61,7 @@
 
     .wrapper .form-field {
         padding-left: 10px;
-        margin-bottom: 20px;
+        /* margin-bottom: 20px; */
         border-radius: 20px;
         box-shadow: inset 8px 8px 8px #cbced1, inset -8px -8px 8px #fff;
     }
@@ -94,6 +94,10 @@
 
     .wrapper a:hover {
         color: #039BE5;
+    }
+
+    .wrapper .btn[role="on"]{
+        background-color: grey;
     }
 
     @media(max-width: 380px) {

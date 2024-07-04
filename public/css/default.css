@@ -1,0 +1,59 @@
+.form-control{
+    outline: none !important;
+    border: none !important;
+    box-shadow: none !important;
+}
+
+.box-field{
+    position: relative;
+}
+
+.field-error{
+    color:red;
+    display: block;
+    width: 100%;
+    position: relative;
+}
+
+.is-loading{
+    position: relative;
+}
+
+.spin-right.is-loading::after{
+    right: 10px;
+}
+
+.is-loading[role="on"]:after{
+    content: "";
+    display: block;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    width: 1.4em;
+    height: 1.4em;
+    border: 2px solid #f3f3f3;
+    /* border-top-color: rgb(243, 243, 243);
+    border-right-color: rgb(243, 243, 243); */
+    border-radius: 50%;
+    border-right-color: transparent;
+    border-top-color: transparent;
+    -webkit-animation: spinAround 1s infinite linear;
+    animation: spinAround 1s infinite linear;
+    opacity: 1;
+}
+
+
+.mg-b20{
+    margin-bottom: 20px;
+}
+
+
+/* ANIMATE */
+
+@-webkit-keyframes spinAround{
+    0%{-webkit-transform:rotate(0deg);transform:rotate(0deg)}to{-webkit-transform:rotate(359deg);transform:rotate(359deg)}
+}
+@keyframes spinAround{
+    0%{-webkit-transform:rotate(0deg);transform:rotate(0deg)}to{-webkit-transform:rotate(359deg);transform:rotate(359deg)}
+}

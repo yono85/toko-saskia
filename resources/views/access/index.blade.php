@@ -15,9 +15,11 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js" type="text/javascript"></script>
 <link rel="stylesheet" type="text/css" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css">
 <link rel="stylesheet" type="text/css" href="/css/access/style.css">
+<link rel="stylesheet" type="text/css" href="/css/default.css">
 
-<script src="/js/js10.js" type="text/javascript"></script>
 
+@include('config')
+<script src="/js/globals.js" type="text/javascript"></script>
 </head>
 <body>
     @yield('content')

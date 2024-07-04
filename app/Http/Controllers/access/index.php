@@ -4,6 +4,7 @@ namespace App\Http\Controllers\access;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Cookie;
 
 class index extends Controller
 {
@@ -26,6 +27,8 @@ class index extends Controller
     }
 
     public function loginadmin(Request $request){
+
+        
         $data = [
             'account'   =>  ''
         ];

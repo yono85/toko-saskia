@@ -22,7 +22,15 @@ $root = '\App\Http\Controllers';
 Route::group(['prefix' => '/', 'middleware' => 'CheckLogoutFront'], function() use ($root){
 
     Route::get('/', $root . '\front\index@main');
+    Route::get('/product', $root . '\front\product\index@list');
+    Route::get('/product/{any}', $root . '\front\product\index@detail');
 
+    // ORDERS
+    Route::get('/cart', $root . '\orders\index@cart');
+    Route::get('/checkout', $root . '\orders\index@checkout');
+
+    //HOME
+    Route::get('/home', $root . '\home\index@main');
 });
 
 
@@ -30,12 +38,16 @@ Route::group(['prefix' => '/', 'middleware' => 'CheckLogoutFront'], function() u
 Route::group(['prefix' => '/', 'middleware' => 'CheckLogin'], function() use ($root){
     Route::get('/login', $root . '\access\index@login');
     Route::get('/signup', $root . '\access\index@signup');
+
+    Route::get('/admin', $root . '\access\index@loginadmin');
+
+
+
 });
 
 
 Route::group(['prefix' => '/admin', 'middleware' => 'CheckLogoutAdmin'], function() use ($root){
 // Route::group(['prefix' => '/admin'], function() use ($root){
-    Route::get('/', $root . '\access\index@loginadmin');
 
     //
     Route::get('/home', $root . '\admin\index@main');
@@ -63,8 +75,10 @@ Route::group(['prefix' => '/admin', 'middleware' => 'CheckLogoutAdmin'], functio
 
 Route::group(['prefix' => '/api'], function() use ($root)
 {
-    Route::get('/login', $root . '\access\manage@login');
-    Route::get('/signup', $root . '\access\manage@signup');
+    Route::post('/login', $root . '\access\manage@login');
+    Route::post('/signup', $root . '\access\manage@signup');
+
+
     Route::get('/logout', $root . '\access\manage@logout');
 
 });
