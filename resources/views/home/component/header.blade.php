@@ -127,10 +127,10 @@
                                                     <div class="intbl">
                                                         <div class="div">
                                                             <div class="div" id="account-name">
-                                                                <span >Account Name</span>
+                                                                <span >{{$account->name}}</span>
                                                             </div>
                                                             <div class="div label uname" id="account-email">
-                                                                <span>username</span>
+                                                                <span>{{$account->email}}</span>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -149,7 +149,7 @@
                                                             </a>
                                                         </li>
                                                         <li>
-                                                            <a href="#" id="account-logout">
+                                                            <a href="/api/logout" id="account-logout">
                                                                 <div class="div">
                                                                     <span>Keluar</span>
                                                                     <span class="ic sli_icon-logout"></span>

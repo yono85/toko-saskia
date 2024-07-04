@@ -15,12 +15,13 @@ class CreateOrderItemsTable extends Migration
     {
         Schema::create('order_items', function (Blueprint $table) {
             $table->id();
-            $table->foreignUuid('order_id');
-            $table->foreignUuid('prduct_id');
+            $table->string('order_code');
+            $table->string('product_code');
             $table->integer('quantity');
             $table->integer('price');
             $table->integer('total');
             $table->timestamps();
+            $table->integer('status');
         });
     }
 

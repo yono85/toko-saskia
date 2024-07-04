@@ -61,9 +61,9 @@ class index extends Controller
             $getProductDetail = $getProductDetail->detail(['code'=>$Config->subURL()[4]]);
 
             // IF NOT FOUND CODE PRODUCT
-            if( $getProductDetail == null){
-                return redirect('/');
-            }
+            // if( $getProductDetail == null){
+            //     return redirect('/');
+            // }
 
 
             $getProduct = new \App\Http\Controllers\product\index;
@@ -71,6 +71,8 @@ class index extends Controller
 
             // DATA
             $data = [
+                'TITLE'     =>  'Keranjang ' . $Config->APPS()['NAME'],
+                'APPS'      =>  $Config->APPS(),
                 'account'   =>  $Account,
                 'product_detail'   =>  $getProductDetail,
                 'product'           =>  $getProduct

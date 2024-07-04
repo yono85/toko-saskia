@@ -28,6 +28,7 @@ Route::group(['prefix' => '/', 'middleware' => 'CheckLogoutFront'], function() u
     // ORDERS
     Route::get('/cart', $root . '\orders\index@cart');
     Route::get('/checkout', $root . '\orders\index@checkout');
+    Route::get('/checkout/success', $root . '\orders\index@success');
 
     //HOME
     Route::get('/home', $root . '\home\index@main');
@@ -77,10 +78,14 @@ Route::group(['prefix' => '/api'], function() use ($root)
 {
     Route::post('/login', $root . '\access\manage@login');
     Route::post('/signup', $root . '\access\manage@signup');
-
-
     Route::get('/logout', $root . '\access\manage@logout');
 
+    //ORDERS
+    Route::post('/checkout/create', $root . '\orders\manage@main');
+    Route::post('/checkout/send', $root . '\orders\manage@sendCheckout');
+    Route::post('/checkout/confrm', $root . '\orders\manage@confrmCheckout');
+
+    
 });
 
 

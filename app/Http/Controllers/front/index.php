@@ -37,7 +37,7 @@ class index extends Controller
 
             $data = [
                 'TITLE'     =>  'Selamat datang di',
-                'APPS'      =>  '',
+                'APPS'      =>  $Config->APPS(),
                 'account'   =>  $Account,
                 'product'   =>  $getProduct
             ];

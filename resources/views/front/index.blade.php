@@ -1,10 +1,16 @@
 <html lang="en"><head>
-    <title>Zay Shop eCommerce HTML CSS Template</title>
+    <title>{{$TITLE}}</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link rel="apple-touch-icon" href="https://themewagon.github.io/zay-shop/assets/img/apple-icon.png">
-    <link rel="shortcut icon" type="image/x-icon" href="https://themewagon.github.io/zay-shop/assets/img/favicon.ico">
+
+    <!-- icon -->
+    <link rel="icon" href="{{$APPS['ICON']}}" sizes="32x32">
+    <link rel="icon" href="{{$APPS['ICON']}}" sizes="192x192">
+    <link rel="apple-touch-icon-precomposed" href="{{$APPS['ICON']}}">
+    <meta name="msapplication-TileImage" content="{{$APPS['ICON']}}">
+
+    <link rel="shortcut icon" type="image/x-icon" href="{{$APPS['ICON']}}">
 
     <link rel="stylesheet" href="https://themewagon.github.io/zay-shop/assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://themewagon.github.io/zay-shop/assets/css/templatemo.css">
@@ -14,8 +20,12 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;200;300;400;500;700;900&amp;display=swap">
     <link rel="stylesheet" href="https://themewagon.github.io/zay-shop/assets/css/fontawesome.min.css">
 
-    
+
+    <link rel="stylesheet" href="/css/default.css">
+
     @include('config')
+    <script src="/js/globals.js"></script>
+
 </head>
 
 <body>

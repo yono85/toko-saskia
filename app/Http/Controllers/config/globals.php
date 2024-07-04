@@ -9,11 +9,12 @@ class globals extends Controller
 {
     // APPS
     public function APPS(){
+
         $data = [
             'NAME'      =>  env('APP_NAME'),
             'BASE_URL'  =>  $this->BASE_URL(),
-            'ICON'      =>  '',
-            'LOGO'      =>  '',
+            'ICON'      =>  '/assets/icon/logo-toko.png',
+            'LOGO'      =>  '/assets/icon/logo-toko.png',
             'CREATED'   =>  '&copy; ' . date('Y')
         ];
 
@@ -75,4 +76,14 @@ class globals extends Controller
 
         return $subURL;
     }
+
+    //CREATE INVOICE    
+    public function invoice($request){
+        $length = sprintf('%03s', $request);
+        $code = date('Ymd', time()) . "/" . $length . "/INV";
+
+        return $code;
+
+    }
+
 }

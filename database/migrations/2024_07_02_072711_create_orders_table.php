@@ -23,6 +23,8 @@ class CreateOrdersTable extends Migration
             $table->integer('subtotal');
             $table->integer('discount');
             $table->integer('total');
+            $table->integer('paid_status');
+            $table->string('payment_metode');
             $table->timestamps();
             $table->integer('status');
         });

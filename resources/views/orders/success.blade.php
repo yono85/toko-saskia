@@ -31,7 +31,7 @@
                 <i class="icon-arrow-prev"></i>
             </a>
             
-            <h1 id="titlePage" class="page-title text-truncate text-center text-upper text-capitalize flex-1 h6 mb-0" style="line-height: 60px">Checkout</h1>
+            <h1 id="titlePage" class="page-title text-truncate text-center text-upper text-capitalize flex-1 h6 mb-0" style="line-height: 60px">Terimakasih</h1>
 
         </div>
     </nav>
@@ -129,86 +129,28 @@
                             <hr class="my-4 opacity-50">
                         </div>
                         
-                        <section id="payment_details" class="mb-4">
-
-                            <div id="payment-options">
-                                <!-- product box -->
-                                <h4 class="h6 mb-3 mb-md-4  text-uppercase">Opsi pembayaran</h4>
-
-                                <div class="payment-options mb-4 box-field" style="border-width: 2px">
-                                    <label class="py-3 px-4">
-                                        <input type="radio" name="payment" value="bca" >
-                                        <img class="mr-3" src="https://utas.me/assets/images/bank_bca.png" alt="bca" height="32">
-                                        <span>Bank BCA</span>
-                                        <i class="ml-auto icon-check icon-status"></i>
-                                    </label>
-                                    <label class="py-3 px-4">
-                                        <input type="radio" name="payment" value="bni" >
-                                        <img class="mr-3" src="https://utas.me/assets/images/bank_bni.png" alt="bni" height="32">
-                                        <span>Bank BNI</span>
-                                        <i class="ml-auto icon-check icon-status"></i>
-                                    </label>
-                                    <label class="py-3 px-4">
-                                        <input type="radio" name="payment" value="bri" >
-                                        <img class="mr-3" src="https://utas.me/assets/images/bank_bri.png" alt="bri" height="32">
-                                        <span>Bank BRI</span>
-                                        <i class="ml-auto icon-check icon-status"></i>
-                                    </label>
-                                    <label class="py-3 px-4">
-                                        <input type="radio" name="payment" value="mandiri" >
-                                        <img class="mr-3" src="https://utas.me/assets/images/bank_mandiri.png" alt="mandiri" height="32">
-                                        <span>Bank MANDIRI</span>
-                                        <i class="ml-auto icon-check icon-status"></i>
-                                    </label>
-                                    <label class="py-3 px-4">
-                                        <input type="radio" name="payment" value="permata" >
-                                        <img class="mr-3" src="https://utas.me/assets/images/bank_permata.png" alt="permata" height="32">
-                                        <span>Bank PERMATA</span>
-                                        <i class="ml-auto icon-check icon-status"></i>
-                                    </label>
-                                </div>
-            
-                            </div>
-                            
-                        </section>
-                        
                     </div>
 
                     <div class="col-md-6 pl-md-5">
                         <section id="pay_details" class="sticky-top " style="top: calc(60px + 1rem); z-index: 3;">
                             <div class="card card-body rounded-lg p-md-4 border-0">
+
+                            <h4 class="h6 mb-3 mb-md-4  text-uppercase">Pembayaran</h4>
+
+                                <div class="price-group">
+                                    <label>Metode Pembayaran</label>
+                                    <label class="price-label">Bank {{$orders['payment']['metode']}}</label>
+                                </div>
+                                <div class="price-group">
+                                    <label>Status</label>
+                                    <label class="price-label"> <b class="payment-status-{{$orders['payment']['status']}} text-upper">{{$orders['payment']['status']}}</b></label>
+                                </div>
+
+                                <hr class="opacity-50">
+
+
                                 <h4 class="h6 mb-3 mb-md-4  text-uppercase">Total</h4>
 
-                                <div class="form-group mb-0" style="display:none">
-
-                                    <div id="voucher_label" class="text-nowrap">
-                                        <!-- if voucher applied: "Voucher: <strong>vouchercode</strong>" -->
-                                        <label for="voucher_code" class="mb-0">Punya kode voucher?</label>
-                                        <div class="ml-auto">
-                                            <!-- if voucher applied: "Edit" -->
-                                            <button class="btn theme-yellow bg-white px-3 invisible" type="button" data-toggle="collapse" data-target="#voucher_code" aria-expanded="true"><i class="icon icon-add mr-0"></i></button>
-                                        </div>
-                                    </div>
-
-                                    <div class="input-group mt-1 mb-3 collapse show" id="voucher_code" style="">
-                                        <input class="form-control voucher-code" placeholder="Masukkan kode voucher di sini">
-                                        <div class="input-group-append">
-                                            <button type="button" class="btn theme-yellow btn-apply-voucher">Apply</button>
-                                        </div>
-                                    </div>
-                                    <input type="hidden" name="voucher">
-                                </div>
-
-                                <!-- Showing discount when voucher applied -->
-                                <div class="voucher-discount" style="display:none;">
-                                    <hr class="opacity-50">
-                                    <div class="price-group ongkir-field">
-                                        <label>Diskon</label>
-                                        <strong class="price-label text-success">
-                                            <span></span>
-                                        </strong>
-                                    </div>
-                                </div>
                                 
                                 <hr class="opacity-50">
 
@@ -237,7 +179,7 @@
                                         </div>
                                     </div>
                                     <div class="mt-1 collapse show" id="buyer_note" style="">
-                                        <textarea class="form-control" name="note" rows="2" placeholder="Tulis catatan di sini">{{$orders['notes']}}</textarea>
+                                        <textarea class="form-control" name="note" rows="2" placeholder="Tulis catatan di sini" disabled="disabled">{{$orders['notes']}}</textarea>
                                         <div class="alert bg-light-blue mt-2 d-flex align-items-start">
                                             <i class="icon-information-circle mr-2 mt-1"></i>
                                             <small>Masukkan informasi tambahan dalam untuk penjual</small>
@@ -245,7 +187,7 @@
                                     </div>
                                 </div>
                                 
-                                <div class="form-group form-group-submit mt-4 mb-0">
+                                <div class="form-group form-group-submit mt-4 mb-0" style="display:none">
                                     <button type="submit" class="btn d-flex align-items-center justify-content-center position-relative py-3 theme-yellow btn-block is-loading remove spin-right" role="off">Lanjut Pembayaran</button>
                                 </div>
 
@@ -310,7 +252,6 @@
                     var $t = ajaxFormRequest($form);
                     $t.success(function(n){
                         console.log(n);
-                        location.href = n.data.redirect;
                     });
                     $t.error(function(n){
                         console.log(n);
