@@ -32,6 +32,7 @@ Route::group(['prefix' => '/', 'middleware' => 'CheckLogoutFront'], function() u
 
     //HOME
     Route::get('/home', $root . '\home\index@main');
+    Route::get('/home/orders', $root . '\home\index@orders');
 });
 
 

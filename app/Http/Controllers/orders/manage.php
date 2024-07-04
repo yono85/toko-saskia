@@ -59,9 +59,11 @@ class manage extends Controller
 
             //CHECK
             $check = tblOrders::where([
-                'user_id'       =>  trim($request->user_id),
-                'status'        =>  1
-            ])->count();
+                ['user_id', '=', trim($request->user_id)],
+                ['paid_status', '=', 0],
+                ['status', '=', 1]
+            ])
+            ->count();
 
             if( $check == 0 ){
                 $filter = '%' . date('Y-m', time()) . '%';
@@ -80,6 +82,8 @@ class manage extends Controller
                 $Create->notes          =   '';
                 $Create->subtotal       =   0;
                 $Create->total          =   0;
+                $Create->paid_status    =   0;
+                $Create->payment_metode =   '';
                 $Create->discount       =   0;
                 $Create->status         =   1;
                 $Create->save();
@@ -130,9 +134,11 @@ class manage extends Controller
     public function addItems($request){
         try{
             $checkOrders = tblOrders::where([
-                'user_id'   =>  $request->user_id,
-                'status'    =>  1
-            ])->first();
+                ['user_id', '=', $request->user_id],
+                ['paid_status', '=', 0],
+                ['status', '=', 1]
+            ])
+            ->first();
     
             $price = trim($request->product_price);
             $quantity = trim($request->quantity);

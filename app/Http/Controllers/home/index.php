@@ -48,4 +48,37 @@ class index extends Controller
             dd($data);
         }
     }
+
+    public function orders(Request $request){
+        try{
+            $Config = new Config;
+            $Account = null;
+
+            if(Cookie::get('email')){
+
+                $Account = new \App\Http\Controllers\account\manage;
+                $Account = $Account->dataUser(Cookie::get('email'));
+            }
+
+            $data = [
+                'TITLE'     =>  'Pesanan ' . $Config->APPS()['NAME'],
+                'APPS'       =>  $Config->APPS(),
+                'account'   =>  $Account,
+                'orders'    =>  ''
+            ];
+
+            // dd($data);
+
+            return view('home.orders.index')->with($data);
+            
+        }
+        catch(Exception $error){
+            $data = [
+                'message'   =>  $error->getMessage(),
+                'code'      =>  500
+            ];
+
+            dd($data);
+        }
+    }
 }

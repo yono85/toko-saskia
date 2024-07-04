@@ -37,15 +37,15 @@ class index extends Controller
             }
 
 
-            // JIKA ORDER NULL 
-            // MAKA REDIRECT KE FRONT
-            $dataOrders = $this->dataOrders($Account);
+            $checkOrder = $this->checkOrderUsers([
+                'user_id'   =>  $Account->id
+            ]);
 
-            // dd($dataOrders);
-            
-            if( $dataOrders == null || $dataOrders['status'] == "1" && $dataOrders['payment']['status'] != "failed"){
+            if( $checkOrder == null || $checkOrder->address == ""){
                 return redirect('/');
             }
+            
+            $dataOrders = $this->dataOrders($checkOrder->code);
 
 
             $data = [
@@ -88,15 +88,15 @@ class index extends Controller
             }
 
 
-            // JIKA ORDER NULL 
-            // MAKA REDIRECT KE FRONT
-            $dataOrders = $this->dataOrders($Account);
+            $checkOrder = $this->checkOrderUsers([
+                'user_id'   =>  $Account->id
+            ]);
 
-            // dd($dataOrders);
-            
-            if( $dataOrders == null){
+            if( $checkOrder == null ){
                 return redirect('/');
             }
+            
+            $dataOrders = $this->dataOrders($checkOrder->code);
 
             $data = [
                 'TITLE'     =>  'Cart ',
@@ -142,11 +142,11 @@ class index extends Controller
 
             // JIKA ORDER NULL 
             // MAKA REDIRECT KE FRONT
-            $dataOrders = $this->dataOrders($request);
+            $dataOrders = $this->dataOrders($request->q);
 
             // dd($dataOrders);
             
-            if( $dataOrders == null){
+            if( $dataOrders == null || $dataOrders['payment']['status'] == "failed"){
                 return redirect('/');
             }
 
@@ -169,24 +169,27 @@ class index extends Controller
         }
     }
 
+    // check orders
+    public function checkOrderUsers($request){
+        $check = tblOrders::where([
+            'user_id'   =>  $request['user_id'],
+            'paid_status'   =>  0,
+            'status'    =>  1
+        ])->first();
+
+        return $check;
+    }
+
+
     // DATA ORDERS
     public function dataOrders($request){
         try{
 
-            if(isset($request->id)){
-
-                $getOrders = tblOrders::where([
-                    'user_id'   =>  $request->id,
-                    'status'        =>  1
-                ]);
-            }else{
-                $getOrders = tblOrders::where([
-                    'code'   =>  $request->q,
-                    'status'        =>  1
-                ]);
-            }
-
-            $getOrders = $getOrders->first();
+            $getOrders = tblOrders::where([
+                'code'   =>  $request,
+                'status'        =>  1
+            ])
+            ->first();
             
             if( $getOrders == null){
                 return null;
