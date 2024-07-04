@@ -41,6 +41,8 @@ class UserSeeder extends Seeder
         $user->email = "u@g.com";
         $user->password = Hash::make('123456');
         $user->save();
+
+        
         // tblUsers::create([
         //     'level' =>  2,
         //     'name' => 'John doe',
