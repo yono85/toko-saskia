@@ -20,7 +20,7 @@
 
             <!-- Start of Dashboard -->
             <li>
-                <a href="{{$APPS['BASE_URL']}}/home" class="" >
+                <a href="{{$account->level === 1 ? '/admin/home' : '/home'}}" class="" >
                     <i class="icon fa flaticon2-line-chart">
                         <span class="path1"></span>
                     </i>
@@ -42,7 +42,7 @@
                 <div class="collapse show" id="collaps2">
                     <ul>
                         <li>
-                            <a href="{{$APPS['BASE_URL']}}/home/orders" data-role="collapse"><span>Pesanan Saya</span></a>
+                            <a href="{{$account->level === 1 ? '/admin/home/orders' : '/home/orders'}}" data-role="collapse"><span>Pesanan Saya</span></a>
                         </li>
                     </ul>
                 </div>

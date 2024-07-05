@@ -31,15 +31,14 @@
 
                     <ul>
 
+                        @if($account->level == 2)
                         <li class="fl-right">
-
                             <button class="no cmd-modal-widget green rds4 " data-toggle="modal" data-target="#modal-create-formula" data-type="add" role="off">
                                 <span class="ic-abs fas fa-plus"></span>
                                 <span class="sli_icon-bag"></span>
                             </button>
-
-
                         </li>
+                        @endif
 
                         <li class="fl-left">
 

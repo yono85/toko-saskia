@@ -52,6 +52,7 @@ Route::group(['prefix' => '/admin', 'middleware' => 'CheckLogoutAdmin'], functio
 
     //
     Route::get('/home', $root . '\admin\index@main');
+    Route::get('/home/orders', $root . '\admin\index@orders');
     // Route::get('/login', $root . '\access\index@login');
 });
 
