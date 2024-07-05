@@ -35,6 +35,7 @@ Route::group(['prefix' => '/home', 'middleware' => 'CheckLogout'], function() us
     // HOME
     Route::get('/', $root . '\home\index@main');
     Route::get('/orders', $root . '\home\index@orders');
+    Route::get('/account', $root . '\home\index@account');
 });
 
 // access users

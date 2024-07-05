@@ -82,4 +82,37 @@ class index extends Controller
             dd($data);
         }
     }
+
+    public function account(Request $request){
+        try{
+            $Config = new Config;
+            $Account = null;
+
+            if(Cookie::get('email')){
+
+                $Account = new \App\Http\Controllers\account\manage;
+                $Account = $Account->dataUser(Cookie::get('email'));
+            }
+            
+            $data = [
+                'TITLE'     =>  'Account ' . $Config->APPS()['NAME'],
+                'APPS'       =>  $Config->APPS(),
+                'account'   =>  $Account,
+                'orders'    =>  ''
+            ];
+
+            // dd($data);
+
+            return view('home.account.index')->with($data);
+            
+        }
+        catch(Exception $error){
+            $data = [
+                'message'   =>  $error->getMessage(),
+                'code'      =>  500
+            ];
+
+            dd($data);
+        }
+    }
 }
