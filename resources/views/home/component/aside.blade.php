@@ -20,7 +20,7 @@
 
             <!-- Start of Dashboard -->
             <li>
-                <a href="{{$APPS['BASE_URL']}}/dashboard/v2" class="" >
+                <a href="{{$APPS['BASE_URL']}}/home" class="" >
                     <i class="icon fa flaticon2-line-chart">
                         <span class="path1"></span>
                     </i>

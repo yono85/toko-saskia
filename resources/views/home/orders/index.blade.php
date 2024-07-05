@@ -38,38 +38,6 @@
                                 <span class="sli_icon-bag"></span>
                             </button>
 
-                            <div class="dropdown fl-right mw-unset hide">
-
-                                <button type="button" class="no green rds4 no-mgl cmd-modalexport" data-type="default" role="off" data-toggle="modal" data-target="#modalexport">
-                                
-                                    <span class="fas fa-file-download"></span>
-                                    <span class="fsize12">Export to Excel</span>
-                                </button>
-
-                                <div class="dropdown-menu hide" style="will-change: transform;">
-
-                                    <a class="dropdown-item cmd-modalexport" href="#" data-type="default" role="off" data-toggle="modal" data-target="#modalexport">
-                                        <span class="label-name">Format Default</span>
-                                        <span class="ic fa flaticon2-writing"></span>
-                                    </a>
-
-                                    <!-- <div class="bts"></div>
-
-                                    <a class="dropdown-item cmd-modalexport" href="#" data-type="everpro" role="off" data-toggle="modal" data-target="#modalexport">
-                                        <span class="label-name">Format to Everpro</span>
-                                        <span class="ic fa flaticon2-writing"></span>
-                                    </a> -->
-
-                                    <div class="bts"></div>
-
-                                    <a class="dropdown-item cmd-modalexport" href="#" data-type="imezi" role="off" data-toggle="modal" data-target="#modalexport">
-                                        <span class="label-name">Format to Imezi</span>
-                                        <span class="ic fa flaticon2-writing"></span>
-                                    </a>
-
-                                </div>
-
-                            </div>
 
                         </li>
 
@@ -93,11 +61,13 @@
                                         </button>
                                     </div>
 
+                                    @if($account->level == 1)
                                     <button class="grey nobr s10 cmd-filter-table fil-table" role="off">
                                         <span class="ic-filter fas fa-filter"></span>
                                         <span class="ic-close sli_icon-close"></span>
                                         <span class="ic-notif"></span>
                                     </button>
+                                    @endif
 
                                 </div>
 
@@ -113,191 +83,17 @@
                                                     </div>
                                                 </li>
 
-                                                <li class="area-companies">
-                                                    <div class="div field">
-                                                        <div class="div bdy">
-                                                            <div class="div">
-                                                                <span class="legend">PRODUSEN:</span>
-                                                            </div>
-                                                            <div class="ddwn box-filters no-pd area-ddwn keep area-field " data-label="Pilih..." data-value="-1" disabled="disabled">
-                                                                <button class="btn br-rds8 cddwn" role="off">
-                                                                    <label><span class=" color-black">Pilih...</span></label>
-                                                                </button>
-                                                                <div class="ddwn-pg area-ddwn-page">
-                                                                    <div class="ddwn-header hide">
-                                                                        <div class="inhd">
-                                                                            <button height="auto" type="button"></button>
-                                                                            <input type="text" placeholder="Cari..." class="ddwn-tsrc">
-                                                                        </div>
-                                                                    </div>
-                                                                    <ul>
-                                                                        <li aria-selected="false" dataid="0" class="">
-                                                                            <button role="off" dataid="0" >
-                                                                                <span>Non Pangan</span>
-                                                                            </button>
-                                                                        </li>
-                                                                    </ul>
-                                                                </div>
-                                                                <input type="hidden" class="value-dropdown" name="uid" value="-1">
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </li>
-
-                                                <li class="area-owner">
-                                                    <div class="div field">
-                                                        <div class="div bdy">
-                                                            <div class="div">
-                                                                <span class="legend">PEMBUAT:</span>
-                                                            </div>
-                                                            <div class="ddwn box-filters no-pd area-ddwn keep area-field " data-label="Pilih..." data-value="-1" disabled="disabled">
-                                                                <button class="btn br-rds8 cddwn" role="off" disabled="disabled">
-                                                                    <label><span class=" color-black">Pilih...</span></label>
-                                                                </button>
-                                                                <div class="ddwn-pg area-ddwn-page">
-                                                                    <div class="ddwn-header hide">
-                                                                        <div class="inhd">
-                                                                            <button height="auto" type="button"></button>
-                                                                            <input type="text" placeholder="Cari..." class="ddwn-tsrc">
-                                                                        </div>
-                                                                    </div>
-                                                                    <ul>
-                                                                        <!-- <li aria-selected="false" dataid="0" class="">
-                                                                            <button role="off" dataid="0" >
-                                                                                <span>Non Pangan</span>
-                                                                            </button>
-                                                                        </li> -->
-                                                                    </ul>
-                                                                </div>
-                                                                <input type="hidden" class="value-dropdown" name="uid" value="-1">
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </li>
-
-                                                <li class="area-type">
-                                                    <div class="div field">
-                                                        <div class="div bdy">
-                                                            <div class="div">
-                                                                <span class="legend">JENIS:</span>
-                                                            </div>
-                                                            <div class="ddwn box-filters no-pd area-ddwn keep area-field " data-label="Pilih..." data-value="-1" disabled="disabled">
-                                                                <button class="btn br-rds8 cddwn" role="off">
-                                                                    <label><span class=" color-black">Pilih...</span></label>
-                                                                </button>
-                                                                <div class="ddwn-pg area-ddwn-page">
-                                                                    <div class="ddwn-header hide">
-                                                                        <div class="inhd">
-                                                                            <button height="auto" type="button"></button>
-                                                                            <input type="text" placeholder="Cari..." class="ddwn-tsrc">
-                                                                        </div>
-                                                                    </div>
-                                                                    <ul>
-                                                                        <li aria-selected="false" dataid="-1" class="">
-                                                                            <button role="off" dataid="-1" >
-                                                                                <span>All...</span>
-                                                                            </button>
-                                                                        </li>
-                                                                        <li aria-selected="false" dataid="0" class="">
-                                                                            <button role="off" dataid="0" >
-                                                                                <span>Sample</span>
-                                                                            </button>
-                                                                        </li>
-                                                                        <li aria-selected="false" dataid="1" class="">
-                                                                            <button role="off" dataid="1" >
-                                                                                <span>Eksisting</span>
-                                                                            </button>
-                                                                        </li>
-                                                                        <li aria-selected="false" dataid="2" class="">
-                                                                            <button role="off" dataid="2" >
-                                                                                <span>Duplikat</span>
-                                                                            </button>
-                                                                        </li>
-                                                                        <li aria-selected="false" dataid="3" class="">
-                                                                            <button role="off" dataid="3" >
-                                                                                <span>Riset</span>
-                                                                            </button>
-                                                                        </li>
-                                                                    </ul>
-                                                                </div>
-                                                                <input type="hidden" class="value-dropdown" name="type" value="-1">
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </li>
-
-                                                <li class="area-progress">
-                                                    <div class="div field">
-                                                        <div class="div bdy">
-                                                            <div class="div">
-                                                                <span class="legend">PROGERSS:</span>
-                                                            </div>
-                                                            <div class="ddwn box-filters no-pd area-ddwn keep area-field " data-label="Pilih..." data-value="-1" disabled="disabled">
-                                                                <button class="btn br-rds8 cddwn" role="off">
-                                                                    <label><span class=" color-black">Pilih...</span></label>
-                                                                </button>
-                                                                <div class="ddwn-pg area-ddwn-page">
-                                                                    <div class="ddwn-header hide">
-                                                                        <div class="inhd">
-                                                                            <button height="auto" type="button"></button>
-                                                                            <input type="text" placeholder="Cari..." class="ddwn-tsrc">
-                                                                        </div>
-                                                                    </div>
-                                                                    <ul>
-                                                                        <li aria-selected="false" dataid="-1" class="">
-                                                                            <button role="off" dataid="-1" >
-                                                                                <span>All...</span>
-                                                                            </button>
-                                                                        </li>
-                                                                        <li aria-selected="false" dataid="1" class="">
-                                                                            <button role="off" dataid="1" >
-                                                                                <span>Done</span>
-                                                                            </button>
-                                                                        </li>
-                                                                        <li aria-selected="false" dataid="2" class="">
-                                                                            <button role="off" dataid="2" >
-                                                                                <span>Progress</span>
-                                                                            </button>
-                                                                        </li>
-                                                                        <li aria-selected="false" dataid="3" class="">
-                                                                            <button role="off" dataid="3" >
-                                                                                <span>Shiping</span>
-                                                                            </button>
-                                                                        </li>
-                                                                        <li aria-selected="false" dataid="0" class="">
-                                                                            <button role="off" dataid="0" >
-                                                                                <span>Failed</span>
-                                                                            </button>
-                                                                        </li>
-                                                                    </ul>
-                                                                </div>
-                                                                <input type="hidden" class="value-dropdown" name="progress" value="-1">
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </li>
-
-                                                <li class="hide">
-                                                    <div class="div field area-select-cs">
-                                                        <div class="div legend">PEMBUAT</div>
-                                                        <div class="div bdy">
-                                                            <div class="div">
-                                                                <!-- select cs ID -->
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </li>
-
                                                 <li class="hide">
                                                     <div class="div field">
-                                                        <div class="div legend">JENIS</div>
+                                                        <div class="div legend">USERS</div>
                                                         <div class="div bdy">
-                                                            <select class="selectpicker cmd-type val-min1" data-live-search="false" name="cat-type" data-field="type">
+                                                            <select class="selectpicker cmd-type val-min1" data-live-search="false" name="uid" data-field="users">
+                                                                
+                                                                @if($account->level == 2)
+                                                                <option value="{{$account->id}}">{{$account->name}}</option>
+                                                                @else
                                                                 <option value="-1">All...</option>
-                                                                <option value="0">Sampel</option>
-                                                                <option value="1">Eksisting</option>
-                                                                <option value="2">Duplikat</option>
-                                                                <option value="3">Riset</option>
+                                                                @endif
                                                             </select>
                                                         </div>
                                                     </div>
@@ -305,14 +101,13 @@
 
                                                 <li class="hide">
                                                     <div class="div field">
-                                                        <div class="div legend">PROGRESS</div>
+                                                        <div class="div legend">STATUS</div>
                                                         <div class="div bdy">
-                                                            <select class="selectpicker cmd-progress val-min1" data-live-search="false" name="cat-progress" data-field="progress">
+                                                            <select class="selectpicker cmd-progress val-min1" data-live-search="false" name="status" data-field="status">
                                                                 <option value="-1">All...</option>
-                                                                <option value="1">Done</option>
-                                                                <option value="2">Progress</option>
-                                                                <option value="3">Shiping</option>
-                                                                <option value="0">Failed</option>
+                                                                <option value="1">Paid</option>
+                                                                <option value="2">Verif</option>
+                                                                <option value="0">Waiting</option>
                                                             </select>
                                                         </div>
                                                     </div>
@@ -854,36 +649,21 @@
                                             <div class="dropdown-menu">
 
                                                 <a class="dropdown-item cmd-modal-widget" data-toggle="modal" data-target="#modal-create-formula" data-type="edit" href="#" role="off">
-                                                    <span>Preview</span>
-                                                    <span class="ic sli_icon-eye"></span>
+                                                    <span>Lihat Detail</span>
+                                                    <span class="ic sli_icon-pencil"></span>
                                                 </a>
 
+                                                @if($account->level == 1)
+                                                <div class="dropdown-divider"></div>
 
-                                                <a class="dropdown-item cmd-modal-widget" data-toggle="modal" msg-type="delete-order" data-target="#modal-duplicate" data-invoice="#" href="#"role="off">
-
-                                                    <!-- <a class="no cmd-modal-widget green rds4 " data-toggle="modal" data-target="#modal-create-formula" data-type="add" role="off"> -->
+                                                <a class="dropdown-item color-orange cmd-modal-widget" data-toggle="modal" msg-type="delete-order" data-target="#modal-update" data-invoice="#" href="#"role="off">
                                                 
-                                                    <span>Duplikat</span>
-                                                    <span class="ic sli_icon-loop"></span>
+                                                    <span>Verifikasi</span>
+                                                    <span class="ic sli_icon-credit-card"></span>
                                                 </a>
-                                                <div class="div">
-                                                    <div class="dropdown-divider"></div>
-                                                    <!-- <a class="dropdown-item color-orange cmd-modal-update" data-toggle="modal" msg-type="delete-order" data-target="#modal-update-status" data-invoice="#" href="#"role="off"> -->
-                                                    <a class="dropdown-item color-orange cmd-modal-widget" data-toggle="modal" msg-type="delete-order" data-target="#modal-update" data-invoice="#" href="#"role="off">
-                                                    
-                                                        <span>Update Status</span>
-                                                        <span class="ic sli_icon-pencil"></span>
-                                                    </a>
-                                                </div>
+                                                @endif
 
-                                                <div class="div hide">
-                                                    <div class="dropdown-divider"></div>
-                                                    <a class="dropdown-item color-red cmd-msg-delete" data-toggle="modal" msg-type="delete-order" data-target="#messageBoxDelete" data-invoice="{invoice-delete}" href="#"role="off">
 
-                                                        <span>Hapus</span>
-                                                        <span class="ic sli_icon-trash"></span>
-                                                    </a>
-                                                </div>
                                             </div>
 
                                         </div>

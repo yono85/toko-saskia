@@ -141,7 +141,7 @@
                                                 <div class="tab-pane fade show active" id="pills-home1" role="tabpanel" aria-labelledby="pills-home1-tab">
                                                     <ul class="notfication-list">
                                                         <li>
-                                                            <a href="{{$APPS['BASE_URL']}}/dashboard/account">
+                                                            <a href="{{$APPS['BASE_URL']}}/home/account">
                                                                 <div class="div">
                                                                     <span>Sunting Akun</span>
                                                                     <span class="ic sli_icon-user-following"></span>

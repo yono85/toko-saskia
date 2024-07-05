@@ -38,7 +38,7 @@ class index extends Controller
 
             // dd($data);
 
-            return view('users.index')->with($data);
+            return view('home.main')->with($data);
         }
         catch(Exception $error){
             $data = [
@@ -60,7 +60,7 @@ class index extends Controller
                 $Account = new \App\Http\Controllers\account\manage;
                 $Account = $Account->dataUser(Cookie::get('email'));
             }
-
+            
             $data = [
                 'TITLE'     =>  'Pesanan ' . $Config->APPS()['NAME'],
                 'APPS'       =>  $Config->APPS(),
