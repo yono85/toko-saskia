@@ -49,7 +49,7 @@
         @include('config')
 
         
-        <!-- <script src="{{$APPS['BASE_URL']}}/assets/js/conf.js" type="text/javascript"></script> -->
+        <script src="/js/globals.js" type="text/javascript"></script>
         <!-- <script src="{{$APPS['BASE_URL']}}/assets/js/conf.js" type="text/javascript"></script> -->
 
     </head>

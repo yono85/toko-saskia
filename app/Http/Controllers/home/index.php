@@ -28,6 +28,7 @@ class index extends Controller
                 $Account = $Account->dataUser(Cookie::get('email'));
             }
 
+
             $data = [
                 'TITLE'     =>  'Selamat datang di ' . $Config->APPS()['NAME'],
                 'APPS'       =>  $Config->APPS(),

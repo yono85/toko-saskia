@@ -14,11 +14,8 @@ $root = '\App\Http\Controllers';
 |
 */
 
-// Route::get('/', function(){
-//     dd("oke yes");
-// });
 
-// front
+// FRONT
 Route::group(['prefix' => '/', 'middleware' => 'CheckLogoutFront'], function() use ($root){
 
     Route::get('/', $root . '\front\index@main');
@@ -29,12 +26,16 @@ Route::group(['prefix' => '/', 'middleware' => 'CheckLogoutFront'], function() u
     Route::get('/cart', $root . '\orders\index@cart');
     Route::get('/checkout', $root . '\orders\index@checkout');
     Route::get('/checkout/success', $root . '\orders\index@success');
-
-    //HOME
-    Route::get('/home', $root . '\home\index@main');
-    Route::get('/home/orders', $root . '\home\index@orders');
 });
 
+
+// HOME USERS
+Route::group(['prefix' => '/home', 'middleware' => 'CheckLogout'], function() use ($root){
+
+    // HOME
+    Route::get('/', $root . '\home\index@main');
+    Route::get('/orders', $root . '\home\index@orders');
+});
 
 // access users
 Route::group(['prefix' => '/', 'middleware' => 'CheckLogin'], function() use ($root){
@@ -42,9 +43,6 @@ Route::group(['prefix' => '/', 'middleware' => 'CheckLogin'], function() use ($r
     Route::get('/signup', $root . '\access\index@signup');
 
     Route::get('/admin', $root . '\access\index@loginadmin');
-
-
-
 });
 
 
@@ -55,23 +53,6 @@ Route::group(['prefix' => '/admin', 'middleware' => 'CheckLogoutAdmin'], functio
     Route::get('/home', $root . '\admin\index@main');
     // Route::get('/login', $root . '\access\index@login');
 });
-
-
-// Route::get('/', function () {
-    
-//     dd("oke");
-//     // Route::get('/login', function(){
-//     //     return "login";
-//     // });
-//     // return view('welcome');
-// });
-
-
-// Route::group(['prefix' => '/admin'], function() ue ($root)
-// {
-//     Route::get('/login', $root . '\access\manage@login');
-    
-// });
 
 
 
@@ -85,6 +66,10 @@ Route::group(['prefix' => '/api'], function() use ($root)
     Route::post('/checkout/create', $root . '\orders\manage@main');
     Route::post('/checkout/send', $root . '\orders\manage@sendCheckout');
     Route::post('/checkout/confrm', $root . '\orders\manage@confrmCheckout');
+
+
+    // HOME ORDERS
+    Route::get('/orders/table', $root . '\orders\table@main');
 
     
 });

@@ -86,4 +86,83 @@ class globals extends Controller
 
     }
 
+    public function timeAgo($ptime)
+    {
+
+        $gettime = strtotime($ptime);
+        $days = date('w', strtotime($ptime));
+        $thisday = date('w', time());
+
+        $estimate_time = time() - $gettime;
+        if( $estimate_time < 1 )
+        {
+            return '1d lalu';
+        }
+
+        $condition = [ 
+            12 * 30 * 24 * 60 * 60  =>  'thn',
+            30 * 24 * 60 * 60       =>  'bln',
+            24 * 60 * 60            =>  'hari',
+            60 * 60                 =>  'j',
+            60                      =>  'm',
+            1                       =>  'd'
+        ];
+
+        foreach( $condition as $secs => $str )
+        {
+            $d = $estimate_time / $secs;
+
+            $r = round($d);
+
+            if( $d >= 1 )
+            {
+                    // $r = round( $d );
+                // return ' ' . $r . $str;
+                
+                if( $str == 'm' || $str == 'd')
+                {   
+                    return $r . $str . ' lalu';
+                }
+                elseif( $str == 'j' )
+                {
+                    if( $r < 4 )
+                    {
+                        return $r . $str . ' lalu';
+                    }
+                    else
+                    {
+                        if( $days < $thisday)
+                        {
+                            return 'Kemarin, ' . date('H.i', $gettime);
+                        }
+                        else
+                        {
+                            return date('H.i', $gettime);
+                        }
+                    }
+                }
+                elseif( $str == 'hari' && $r < 7)
+                {
+                    if( $r > 1 )
+                    {
+                        return $this->namahari($ptime) . ', ' . date('H:i', $gettime);
+                    }
+                    else
+                    {
+                        return 'Kemarin, ' . date('H.i', $gettime);
+                    }
+                    
+                }
+                else
+                {
+                    return date('d/m/Y', $gettime);
+
+                }
+
+            }
+        }
+
+    } 
+
+
 }
