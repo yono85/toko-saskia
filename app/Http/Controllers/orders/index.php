@@ -33,7 +33,7 @@ class index extends Controller
             // JIKA BELUM LOGIN
             // REDIRECT KE FRONT
             if($Account == null){
-                return redirect('/');
+                return redirect('/login');
             }
 
 
@@ -84,7 +84,7 @@ class index extends Controller
             // JIKA BELUM LOGIN
             // REDIRECT KE FRONT
             if($Account == null){
-                return redirect('/');
+                return redirect('/login');
             }
 
 
@@ -136,7 +136,7 @@ class index extends Controller
             // JIKA BELUM LOGIN
             // REDIRECT KE FRONT
             if($Account == null){
-                return redirect('/');
+                return redirect('/login');
             }
 
 
@@ -179,7 +179,6 @@ class index extends Controller
 
         return $check;
     }
-
 
     // DATA ORDERS
     public function dataOrders($request){
