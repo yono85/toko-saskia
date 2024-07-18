@@ -48,6 +48,25 @@
                 </div>
             </li>
 
+            @if($account['level'] == "1")
+            <li>
+                <a href="#collaps2" data-toggle="collapse" aria-expanded="true">
+                    <i class="icon sli_icon-bag">
+                        <span class="path1"></span>
+                        <span class="path2"></span>
+                    </i>
+                    <span class="menu-item-title">Kelola Produk</span>
+                    <i class="icon icon-keyboard_arrow_down arrow-icon"></i>
+                </a>
+                <div class="collapse show" id="collaps2">
+                    <ul>
+                        <li>
+                            <a href="/admin/home/product" data-role="collapse"><span>Daftar Produk</span></a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+            @endif
         </ul>
     </div>
     <!-- Vertical Aside Navigation -->

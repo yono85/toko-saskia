@@ -149,7 +149,7 @@
                                                             </a>
                                                         </li>
                                                         <li>
-                                                            <a href="/api/logout" id="account-logout">
+                                                            <a href="/api/logout" >
                                                                 <div class="div">
                                                                     <span>Keluar</span>
                                                                     <span class="ic sli_icon-logout"></span>

@@ -134,7 +134,17 @@
                             <div id="payment-options">
                                 <!-- product box -->
                                 <h4 class="h6 mb-3 mb-md-4  text-uppercase">Opsi pembayaran</h4>
-
+                                <h6 class="font-weight-normal d-flex mb-3">Cash</h6>
+                                <div class="payment-options mb-4 box-field" style="border-width: 2px">
+                                    <label class="py-3 px-4">
+                                        <input type="radio" name="payment" value="cash" >
+                                        <img class="mr-3" src="https://w7.pngwing.com/pngs/579/776/png-transparent-payment-money-computer-icons-cash-invoice-bank-angle-text-hand.png" alt="cash" height="32">
+                                        <span>Cash</span>
+                                        <i class="ml-auto icon-check icon-status"></i>
+                                    </label>
+                                </div>
+                                
+                                <h6 class="font-weight-normal d-flex mb-3">Transfer Bank</h6>
                                 <div class="payment-options mb-4 box-field" style="border-width: 2px">
                                     <label class="py-3 px-4">
                                         <input type="radio" name="payment" value="bca" >
@@ -167,7 +177,7 @@
                                         <i class="ml-auto icon-check icon-status"></i>
                                     </label>
                                 </div>
-            
+
                             </div>
                             
                         </section>

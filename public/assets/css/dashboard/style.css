@@ -8164,6 +8164,7 @@ a.slide[slide="on"] .arslide{
     position: absolute;
     right: 25px;
     top: 30px;
+    height: unset;
 }
 
 .new-modal.new-modal-form .modal-body .ul-box{

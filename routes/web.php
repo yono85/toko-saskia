@@ -14,7 +14,6 @@ $root = '\App\Http\Controllers';
 |
 */
 
-
 // FRONT
 Route::group(['prefix' => '/', 'middleware' => 'CheckLogoutFront'], function() use ($root){
 
@@ -68,6 +67,7 @@ Route::group(['prefix' => '/api'], function() use ($root)
     Route::post('/checkout/create', $root . '\orders\manage@main');
     Route::post('/checkout/send', $root . '\orders\manage@sendCheckout');
     Route::post('/checkout/confrm', $root . '\orders\manage@confrmCheckout');
+    Route::post('/checkout/upload', $root . '\orders\manage@upload');
 
 
     // HOME ORDERS

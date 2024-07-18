@@ -42,13 +42,13 @@ class UserSeeder extends Seeder
         $user->password = Hash::make('123456');
         $user->save();
 
-        
+
         // tblUsers::create([
         //     'level' =>  2,
         //     'name' => 'John doe',
         //     'email' => 'john@gmail.com',
         //     'password' => Hash::make('john@123')
-        // ]);
+        // ]);,
     }
 
     // create product

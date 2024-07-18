@@ -164,5 +164,20 @@ class globals extends Controller
 
     } 
 
+    // NAMA HARI
+    function namahari($date)
+    {
+        $info=date('w', strtotime($date));
+
+        switch($info){
+            case '0': return "Minggu"; break;
+            case '1': return "Senin"; break;
+            case '2': return "Selasa"; break;
+            case '3': return "Rabu"; break;
+            case '4': return "Kamis"; break;
+            case '5': return "Jumat"; break;
+            case '6': return "Sabtu"; break;
+        };
+    }
 
 }

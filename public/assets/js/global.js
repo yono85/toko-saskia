@@ -2266,19 +2266,19 @@ $(document).ready(function(){
 
     // SUBMIT NEW MODAL FOR GLOBAL CLICK
     // $("body").on("click", ".new-modal.show button.modal-submit", function(e){
-    $(".new-modal.show button.modal-submit").click(function(){
+    // $(".new-modal.show button.modal-submit").click(function(){
 
-        // e.preventDefault();
+    //     // e.preventDefault();
 
-        //
-        var cmd = $(this),
-        modal = cmd.parents(".new-modal"),
-        form = modal.find("form");
+    //     //
+    //     var cmd = $(this),
+    //     modal = cmd.parents(".new-modal"),
+    //     form = modal.find("form");
 
-        form.submit();
+    //     form.submit();
 
-        return false;
-    });
+    //     return false;
+    // });
 
 
     // BUTTON CLEAR TEXT

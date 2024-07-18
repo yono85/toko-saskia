@@ -22,7 +22,6 @@
 
 
     <link rel="stylesheet" href="/css/default.css">
-
     @include('config')
     <script src="/js/globals.js"></script>
 

@@ -27,6 +27,48 @@ function ajaxFormRequest(e){
     return $t;
 }
 
+function ajaxFormPostFile(e){
+    var $FORM = e,
+    $URL = $FORM.attr("action"),
+    $METHOD = e.attr("method");
+
+    var $BODY = {
+        type: $METHOD,
+        url: $URL,
+
+        contentType: false,
+        processData: false,
+        data: FormDataFile($FORM),
+        dataType:"JSON"
+    }
+
+    var $t = $.ajax($BODY);
+    return $t;
+}
+
+function FormDataFile(e)
+{
+    var form = e;
+    var fd = new FormData();
+
+
+    var file_data = form.find('*[type="file"]'); // for multiple files
+
+    if( file_data.length > 0){
+        for(var i = 0; i < file_data.length; i++){
+            fd.append(file_data.attr('name'), file_data[0].files[i]);
+        }
+    }
+
+    // fd.append(form.find('input[name="file"]').attr('name'), form.find('input[name="file"]')[0].files[0]);
+
+    var other_data = form.serializeArray();
+    $.each(other_data,function(key,input){
+        fd.append(input.name,input.value);
+    });
+
+    return fd;
+}
 
 function formatRupiah(angka, prefix)
 {

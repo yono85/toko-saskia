@@ -132,6 +132,7 @@
                                 <input type="hidden" name="src" class="empty" value="">
                                 <input type="hidden" name="sort" value="desc" />
                                 <input type="hidden" name="page" value="1" />
+                                <input type="hidden" name="ulevel" value="{{$account['level']}}">
 
                             </form>
 
@@ -624,10 +625,10 @@
                                     <div class="iner-bts"></div>
                                     <div class="div">
                                         <div class="div">
-                                            <span class="label">Bank:</span>
+                                            <span class="label">Jenis Pembayaran:</span>
                                         </div>
                                         <span>
-                                            {bank}
+                                            {payment_metode}
                                         </span>
                                     </div>
                                 </div>
@@ -647,15 +648,25 @@
 
                                             <div class="dropdown-menu">
 
-                                                <a class="dropdown-item cmd-modal-widget" data-toggle="modal" data-target="#modal-create-formula" data-type="edit" href="#" role="off">
-                                                    <span>Lihat Detail</span>
-                                                    <span class="ic sli_icon-pencil"></span>
+                                                <!-- <a class="dropdown-item cmd-modal-widget" data-toggle="modal" data-target="#modal-create-formula" data-type="edit" href="#" role="off"> -->
+                                                <a class="dropdown-item cmd-modal-widget" target="_blank" href="{link_checkout}">
+                                                    <span>Detail Pesanan</span>
+                                                    <span class="ic sli_icon-bag"></span>
                                                 </a>
+
+                                                <div class="div {area-upload}"  >
+                                                    <div class="dropdown-divider"></div>
+
+                                                    <a class="dropdown-item cmd-modal-widget color-orange" data-toggle="modal" data-target="#modal-payment" data-type="edit" href="#" role="off">
+                                                        <span>Upload Bukti Bayar</span>
+                                                        <span class="ic sli_icon-cloud-upload"></span>
+                                                    </a>
+                                                </div>
 
                                                 @if($account->level == 1)
                                                 <div class="dropdown-divider"></div>
 
-                                                <a class="dropdown-item color-orange cmd-modal-widget" data-toggle="modal" msg-type="delete-order" data-target="#modal-update" data-invoice="#" href="#"role="off">
+                                                <a class="dropdown-item color-orange cmd-modal-widget" data-toggle="modal" data-target="#modal-verification-payment" href="#" role="off">
                                                 
                                                     <span>Verifikasi</span>
                                                     <span class="ic sli_icon-credit-card"></span>
@@ -681,6 +692,9 @@
 
 </div>
 
+@include('modals.upload-payment')
+@include('modals.verification-payment')
+
 <script>
 $(document).ready(function(){
 
@@ -695,7 +709,7 @@ $(document).ready(function(){
         var $t = ajaxFormRequest(form);
         $t.success(function(n){
             var data = n.data;
-            console.log(data);
+            console.log(n);
 
             body.html('');
 
@@ -739,9 +753,10 @@ $(document).ready(function(){
         $.each(data, function(i,item){
             var listx = temp;
         
-            listx = listx.replace("{status}", '<li class="'+(item.payment.status === 0 ? 'bc-red': (item.payment.status === 1 ? 'bc-green' : (item.payment.status === 2 ? 'bc-orange' :'bc-purple') ) )+'"><span class="fa flaticon2-check-mark ic hide"></span><span class="up-txt">'+ (item.payment.label) +'</span></li>');
+            listx = listx.replace("{status}", '<li class="'+(item.payment.status === 0 ? 'bc-red': (item.payment.status === 1 ? 'bc-green' : (item.payment.status === 2 ? 'bc-orange' :'bc-purple') ) )+'"><span class="fa flaticon2-check-mark ic hide"></span><span class="up-txt">'+ ( item.payment.from.bank === "" && item.payment.bank !== "CASH" ? "UPLOAD BUKTI BAYAR" : item.payment.label ) +'</span></li>');
 
             listx = listx.replace("{id}", item.id);
+            listx = listx.replace("{token}", item.code);
             listx = listx.replace("{invoice}", item.invoice);
             listx = listx.replace("{name}", item.user.name);
             listx = listx.replace("{notes}", item.notes);
@@ -749,7 +764,9 @@ $(document).ready(function(){
             listx = listx.replace("{date}", item.date);
             listx = listx.replace("{email}", item.user.email);
             listx = listx.replace("{total}", formatRupiah(item.payment.total));
-            listx = listx.replace("{bank}", item.payment.bank);
+            listx = listx.replace("{area-upload}", (item.payment.bank === "CASH" ? "hide" : (item.payment.from.bank !== "" ? "hide" : "") ) );
+            listx = listx.replace("{payment_metode}", (item.payment.bank === "CASH" ? "" : "Transfer Bank " )+ item.payment.bank);
+            listx = listx.replace("{link_checkout}", ( item.payment.status === 0 ? '/cart' : '/checkout/success?q=' + item.code));
 
             list += listx;
         });
@@ -765,6 +782,18 @@ $(document).ready(function(){
 
     // call load table
     loadtable();
+
+
+    $("body").on("click", ".cmd-modal-widget[data-target='#modal-payment']", function(){
+        var $button = $(this),
+            $orderCode = $button.parents(".tr").attr("data-token"),
+            $modal = $($button.attr("data-target"));
+
+            console.log($orderCode);
+            $modal.find("*[name='order_code']").val($orderCode);
+            $modal.find("*[name='openpage']").val('table');
+
+    });
 
     return false;
 })

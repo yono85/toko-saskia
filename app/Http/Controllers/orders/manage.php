@@ -9,6 +9,7 @@ use App\Models\orders as tblOrders;
 use App\Models\order_items as tblOrderItems;
 use App\Models\products as tblProducts;
 use Exception;
+use DB;
 
 class manage extends Controller
 {
@@ -34,7 +35,7 @@ class manage extends Controller
                 'code'      =>  20,
                 'data'      =>  [
                     'checkout'  =>  $checkout,
-                    'redirect'  =>  $request->type_orders === "buy" ? "/checkout" : "/cart",
+                    'redirect'  =>  "/cart" //$request->type_orders === "buy" ? "/checkout" : "/cart",
                 ]
             ];
     
@@ -84,6 +85,11 @@ class manage extends Controller
                 $Create->total          =   0;
                 $Create->paid_status    =   0;
                 $Create->payment_metode =   '';
+                $Create->payment_bank =   '';
+                $Create->payment_owner =   '';
+                $Create->payment_norek =   '';
+                $Create->payment_date =   '';
+                $Create->payment_images =   '';
                 $Create->discount       =   0;
                 $Create->status         =   1;
                 $Create->save();
@@ -266,5 +272,57 @@ class manage extends Controller
 
             return response()->json($data, 500);
         }
+    }
+
+    ///
+    public function upload(Request $request){
+
+        try{
+
+            $file = $request->file("file");
+
+            $filename = 'trf_' . trim($request->order_code) . '_' . time() . '.jpg';
+
+            // $file = $request->file('fileimage');
+
+            // this name
+            // $thisname = 'test_' . time();
+
+            // $extension = $file->getClientOriginalExtension(); // you can also use file name
+            // $fileName = $thisname.'.jpg';
+            $filepath = public_path().'/images/transfer';
+            $uplaod = $file->move($filepath,$filename);
+
+
+
+            $update = DB::table("orders")
+            ->where([
+                'code'    =>  trim($request->order_code)
+            ])
+            ->update([
+                'payment_bank'  =>  trim($request->payment_bank),
+                'payment_owner' =>  trim($request->payment_owner),
+                'payment_norek' =>  trim($request->payment_norek),
+                'payment_date'  =>  trim($request->payment_date),
+                'payment_images'    =>  '/images/transfer/' . $filename //'/images/upload/tran' . $namefile . '.jpg'
+            ]);
+            //
+            $data = [
+                'message'   =>  'success',
+                'code'      =>  20,
+                'data'      =>  $request->file("file")
+            ];
+    
+            return response()->json($data, 200);
+        }
+        catch(Exception $error){
+            $data = [
+                'message'       =>  $error->getMessage(),
+                'code'          =>  500
+            ];
+
+            return response()->json($data, 500);
+        }
+        
     }
 }

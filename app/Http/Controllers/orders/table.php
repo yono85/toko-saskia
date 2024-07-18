@@ -18,11 +18,13 @@ class table extends Controller
             $src = '%' . trim($request->search) . '%';
             $page = trim($request->page);
             $uid = trim($request->uid);
+            $ulevel = trim($request->ulevel);
 
             $getData = tblOrders::from('orders as o')
             ->select(
                 'o.id', 'o.code', 'o.invoice', 'o.created_at', 'o.address', 'o.notes', 'o.total', 'o.payment_metode', 'o.paid_status',
-                'o.user_id', 'u.name as user_name', 'u.email as user_email'
+                'o.user_id', 'u.name as user_name', 'u.email as user_email', 
+                'o.payment_bank', 'o.payment_owner', 'o.payment_norek', 'o.payment_images', 'o.payment_date'
             )
             ->leftJoin('users as u', function($join){
                 $join->on('u.id', '=', 'o.user_id');
@@ -33,6 +35,12 @@ class table extends Controller
             if( $uid != "-1"){
                 $getData = $getData->where([
                     ['o.user_id', '=', $uid]
+                ]);
+            }
+
+            if( $ulevel == "1"){
+                $getData = $getData->where([
+                    ['o.paid_status', '>', 0]
                 ]);
             }
 
@@ -70,7 +78,14 @@ class table extends Controller
                         'status'        =>  (int)$row->paid_status,
                         'label'         =>  ($row->paid_status === 0 ? 'Waiting' : ($row->paid_status === 1 ? 'Paid' : 'Verif') ),
                         'bank'          =>  strtoupper($row->payment_metode),
-                        'total'         =>  $row->total
+                        'total'         =>  $row->total,
+                        'from'          =>  [
+                            'bank'          =>  $row->payment_bank,
+                            'norek'         =>  $row->payment_norek,
+                            'owner'         =>  $row->payment_owner,
+                            'images'        =>  $row->payment_images,
+                            'date'          =>  $row->payment_date
+                        ]
                     ]
                 ];
             }

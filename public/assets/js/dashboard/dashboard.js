@@ -1,6 +1,6 @@
 
 // info login account
-infologin( getCookie(CONFIG.APPS.COOKIE_NAME) );
+// infologin( getCookie(CONFIG.APPS.COOKIE_NAME) );
 
 
 // logout
@@ -899,11 +899,7 @@ $('body').on('click', '.cmd-gender', function(e)
 // END FORM CUSTOMER =================>
 
 
-// keyup input text
-$('body').on('keyup', '.number', function(e)
-{
-    tnumber($(this));
-})
+
 
 //
 function numbFNoZeroWO(e)
@@ -955,7 +951,7 @@ function numbFNoZero(e)
 var notifPg = 1,
 countTotalNotif = 0,
 notifLimit = 0,
-timerNotif = (CONFIG.APPS.NOTIF_TIME * 1000);
+timerNotif = null; //(CONFIG.APPS.NOTIF_TIME * 1000);
 
 function runNotif() {
     // runs every 60 sec and runs on init.
@@ -971,15 +967,15 @@ function callRunNotif(){
     setInterval(runNotif, timerNotif);
 }
 
-callRunNotif();
+// callRunNotif();
 
-var $URL_NOTIF = CONFIG.APPS.URL.NOTIF;
-    $URL_NOTIF += getaccount().level > 0 ? '/api/notification/admin' : '/api/notification/user';
-    $URL_NOTIF += '?level=' + getaccount().level;
-    $URL_NOTIF += '&slevel=' + getaccount().sublevel;
-    $URL_NOTIF += '&uid=' + getaccount().id;
-    $URL_NOTIF += '&compid=' + getaccount().config.company.id;
-    $URL_NOTIF += '&pg=' + notifPg;
+// var $URL_NOTIF = CONFIG.APPS.URL.NOTIF;
+//     $URL_NOTIF += getaccount().level > 0 ? '/api/notification/admin' : '/api/notification/user';
+//     $URL_NOTIF += '?level=' + getaccount().level;
+//     $URL_NOTIF += '&slevel=' + getaccount().sublevel;
+//     $URL_NOTIF += '&uid=' + getaccount().id;timeoutInMiliseconds
+//     $URL_NOTIF += '&compid=' + getaccount().config.company.id;
+//     $URL_NOTIF += '&pg=' + notifPg;
 
 function getNotification()
 {
@@ -1087,74 +1083,7 @@ function getNotification()
     });
 }
 
-function runGetNotification()
-{
-    // e = data, t = metode, k = type header auth, w = type bundle
-    var $te = FormSending("","GET","key","",$URL_NOTIF);
-    $te.success(function(n)
-    {
-        var data = n.data;
-        var anotif = $("body").find(".area-notifications-dd");
-        
-        if( n.code === 200){
 
-            // console.log(n.response);
-            var count = parseFloat(data.count),
-            vcount = count > 9 ? '9+' : data.count;
-    
-            anotif.find(".val-notif-label span").html(vcount);
-            anotif.attr("aria-status", "true");
-    
-            var list = "";
-            $.each(data.list, function(i, item)
-            {
-                list += '<li role="'+item.read_date+'"><a href="'+( CONFIG.APPS.URL.URI + item.content.link )+'" class="ca-notify cmd-read-notify" role="off" area-read="'+item.read_date+'" dataid="'+item.id+'"><span class="user-avatar avatar avatar-img"><span class="sli_icon-bag"></span></span><div class="notification-list-content"><h3 class="title fsize13">'+(item.content.title)+'</h3><span class="label fsize12">'+(item.content.body)+'</span><span class="dt"><span class="fsize11"><span class="fa flaticon-calendar-with-a-clock-time-tools"></span> '+ (item.date) +'</span></span></div></a></li>';
-            })
-            anotif.find(".notfication-list").html(list);
-    
-            notifTitlePage(count);
-            createSoundNotification(count);
-            countTotalNotif = count;
-        }else{
-
-            // countTotalNotif = 0;
-            var list = '';
-            if(data.list !== "")
-            {
-                
-                $.each(data.list, function(i, item)
-                {
-                    list += '<li role="'+item.read_date+'"><a href="'+( CONFIG.APPS.URL.URI + item.content.link )+'" class="ca-notify cmd-read-notify" role="off" area-read="'+item.read_date+'" dataid="'+item.id+'"><span class="user-avatar avatar avatar-img"><span class="sli_icon-bag"></span></span><div class="notification-list-content"><h3 class="title fsize13">'+(item.content.title)+'</h3><span class="label fsize12">'+(item.content.body)+'</span><span class="dt"><span class="fsize11"><span class="fa flaticon-calendar-with-a-clock-time-tools"></span> '+ (item.date) +'</span></span></div></a></li>';
-                })
-                
-            }
-            else
-            {
-                list += '<li class="empty"><div class="notification-list-content"><div class="div"><span>Tidak ada notifikasi</span></div></div></li>';
-            }
-
-            anotif.find(".notfication-list").html(list);
-
-            anotif.find(".val-notif-label span").html(0);
-            anotif.attr("aria-status", "false");
-        
-            notifTitlePage(0);
-
-        }
-    }),
-    $te.error(function(n)
-    {
-        var anotif = $("body").find(".area-notifications-dd");
-        // console.log(n.responseJSON);
-        // if(n.status === 404)
-        // {
-        //     // countTotalNotif = 0;
-        //     anotif.find(".val-notif-label span").html(0);
-        //     anotif.attr("aria-status", "false");
-        // }
-        notifTitlePage(0);
-    });
-}
 
 function notifTitlePage(e)
 {
@@ -1264,7 +1193,7 @@ function createSoundNotification(e){
 
 // inactive detect and refresh token if status false
 // var timeoutInMiliseconds = 10000;
-var timeoutInMiliseconds = CONFIG.APPS.confTimeMSCHToken ;
+var timeoutInMiliseconds = null; //CONFIG.APPS.confTimeMSCHToken ;
 var timeoutIdCHToken; 
 var timeStatusCHToken = 'true';
 
@@ -1318,6 +1247,12 @@ function setupTimeCHToken () {
 
 $(document).ready(function()
 {
+
+    // keyup input text
+    $('body').on('keyup', '.number', function(e)
+    {
+        tnumber($(this));
+    })
 
     //logout
     $('#account-logout').click(function(e)
@@ -1446,7 +1381,6 @@ $(document).ready(function()
         // var text = $(this);
         // console.log(text.val());
     })
-
 
     return false;
 });

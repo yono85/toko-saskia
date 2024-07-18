@@ -34,7 +34,7 @@ class index extends Controller
             $getProduct = new \App\Http\Controllers\product\index;
             $getProduct = $getProduct->list();
 
-
+            
             $data = [
                 'TITLE'     =>  'Selamat datang di',
                 'APPS'      =>  $Config->APPS(),

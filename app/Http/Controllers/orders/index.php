@@ -175,7 +175,8 @@ class index extends Controller
             'user_id'   =>  $request['user_id'],
             'paid_status'   =>  0,
             'status'    =>  1
-        ])->first();
+        ])
+        ->first();
 
         return $check;
     }
@@ -184,9 +185,17 @@ class index extends Controller
     public function dataOrders($request){
         try{
 
-            $getOrders = tblOrders::where([
-                'code'   =>  $request,
-                'status'        =>  1
+            $getOrders = tblOrders::from('orders as o')
+            ->select(
+                'o.id', 'o.code', 'o.invoice', 'o.subtotal', 'o.total', 'o.discount', 'o.address', 'o.notes', 'o.payment_metode', 'o.paid_status', 'o.status', 'o.payment_bank',
+                'pb.norek as to_norek', 'pb.pemilik as to_owner', 'pb.images as to_images'
+            )
+            ->leftJoin('payment_banks as pb', function($join){
+                $join->on('pb.name', '=', 'o.payment_metode');
+            })
+            ->where([
+                'o.code'   =>  $request,
+                'o.status'        =>  1
             ])
             ->first();
             
@@ -207,7 +216,8 @@ class index extends Controller
             ->where([
                 'order_code'        =>  $getOrders->code,
                 'status'            =>  1
-            ])->get();
+            ])
+            ->get();
 
             // if(count($getItems) > 0){
 
@@ -223,7 +233,15 @@ class index extends Controller
                 'notes'     =>  $getOrders->notes,
                 'payment'   =>  [
                     'metode'        =>  strtoupper($getOrders->payment_metode),
-                    'status'        =>  $getOrders->paid_status === 0 ? "failed" : ($getOrders->paid_status === 1 ? "success" : "waiting")
+                    'status'        =>  $getOrders->paid_status === 0 ? "failed" : ($getOrders->paid_status === 1 ? "success" : "waiting"),
+                    'to'        =>  [
+                        'owner'         =>  $getOrders->to_owner,
+                        'norek'         =>  $getOrders->to_norek,
+                        'images'        =>  $getOrders->to_images
+                    ],
+                    'from'      =>  [
+                        'bank'         =>  $getOrders->payment_bank
+                    ]
                 ],
                 'items'     =>  json_decode($getItems),
                 'status'    =>  $getOrders->status

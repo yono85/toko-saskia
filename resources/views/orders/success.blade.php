@@ -17,8 +17,42 @@
     <meta name="msapplication-TileColor" content="#da532c">
     <meta name="theme-color" content="#ffffff">
 
+    <!-- MODAL -->
+
+    <!-- StyleSheets -->
+        <link href="{{$APPS['BASE_URL']}}/assets/temp/css/jquery-ui.css" rel="stylesheet" />
+        <link href="{{$APPS['BASE_URL']}}/assets/temp/css/bootstrap.min.css" rel="stylesheet" />
+        <link href="{{$APPS['BASE_URL']}}/assets/temp/css/perfect-scrollbar.css" rel="stylesheet" />
+
+        <!-- Begin Global Structure -->
+        <!-- <link href="{{$APPS['BASE_URL']}}/assets/temp/css/structure.css" rel="stylesheet" />
+        <link href="{{$APPS['BASE_URL']}}/assets/temp/css/components.css" rel="stylesheet" />
+        <link rel="stylesheet" type="text/css" href="{{$APPS['BASE_URL']}}/assets/css/font.css"> -->
+        <!-- End Global Structure -->
+
+        <!-- Moby Icons -->
+        <!-- <link href="{{$APPS['BASE_URL']}}/assets/temp/css/moby.css" rel="stylesheet" /> -->
+        <link rel="stylesheet" type="text/css" href="{{$APPS['BASE_URL']}}/assets/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" type="text/css" href="{{$APPS['BASE_URL']}}/assets/fonts/iconic/css/material-design-iconic-font.min.css">
+        <link rel="stylesheet" type="text/css" href="{{$APPS['BASE_URL']}}/assets/css/simple-line-icons.css">
+        <link rel="stylesheet" type="text/css" href="{{$APPS['BASE_URL']}}/assets/css/global-plugins.bundle.css">
+
+
+        <!-- FontsOnline -->
+        <!-- <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@200;300;400;600;700;800&display=swap" rel="stylesheet" />
+        <link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700&display=swap" rel="stylesheet" /> -->
+
+        
+        <link rel="stylesheet" type="text/css" href="{{$APPS['BASE_URL']}}/assets/css/dashboard/style.css">
+        <link rel="stylesheet" type="text/css" href="{{$APPS['BASE_URL']}}/assets/css/default.css">
+    
+    <!-- END MODAL -->
+
     <link href="/css/style.css" rel="stylesheet" type="text/css">
     @include('config')
+    <script src="/assets/js/global.js" type="text/javascript"></script>
+    <script src="/assets/js/dashboard/dashboard.js" type="text/javascript"></script>
+
 </head>
 
 <body class="page-checkout store is-feed">
@@ -139,12 +173,42 @@
 
                                 <div class="price-group">
                                     <label>Metode Pembayaran</label>
-                                    <label class="price-label">Bank {{$orders['payment']['metode']}}</label>
+                                    @if($orders['payment']['metode'] == "CASH")
+                                    <label class="price-label">{{$orders['payment']['metode']}}</label>
+                                    @else
+                                    <label class="price-label">Transfer Bank {{$orders['payment']['metode']}}</label>
+                                    @endif
                                 </div>
+                                @if($orders['payment']['metode'] != "CASH")
+                                
+                                <div class="price-group">
+                                    <label>Nama Akun Rekening</label>
+                                    <label class="price-label">{{$orders['payment']['to']['owner']}}</label>
+                                </div>
+
+                                <div class="price-group">
+                                    <label>Nomor Rekening</label>
+                                    <label class="price-label">{{$orders['payment']['to']['norek']}}</label>
+                                </div>
+                                @endif
+
                                 <div class="price-group">
                                     <label>Status</label>
                                     <label class="price-label"> <b class="payment-status-{{$orders['payment']['status']}} text-upper">{{$orders['payment']['status']}}</b></label>
                                 </div>
+
+                                @if($orders['payment']['metode'] != "CASH")
+
+                                @if($orders['payment']['from']['bank'] == '')
+                                <div class="alert bg-light-blue mt-2 align-items-start txt-center">
+                                
+                                    <a class="dropdown-item color-orange cmd-modal-payment" data-toggle="modal" data-target="#modal-payment" data-invoice="#" href="#" role="off">
+                                        Upload Bukti Bayar
+                                    </a>
+                                </div>
+                                @endif
+                                @endif
+
 
                                 <hr class="opacity-50">
 
@@ -180,10 +244,7 @@
                                     </div>
                                     <div class="mt-1 collapse show" id="buyer_note" style="">
                                         <textarea class="form-control" name="note" rows="2" placeholder="Tulis catatan di sini" disabled="disabled">{{$orders['notes']}}</textarea>
-                                        <div class="alert bg-light-blue mt-2 d-flex align-items-start">
-                                            <i class="icon-information-circle mr-2 mt-1"></i>
-                                            <small>Masukkan informasi tambahan dalam untuk penjual</small>
-                                        </div>
+                                        
                                     </div>
                                 </div>
                                 
@@ -208,6 +269,7 @@
     </div>
 
 
+    @include('modals.upload-payment')
 
     <script src="https://utas.me/assets/3rd-party/js/sweetalert2.all.min.js"></script>
     <!-- <script src="https://utas.me/assets/3rd-party/js/jquery.min.js"></script> -->
@@ -219,6 +281,24 @@
     <script src="/js/globals.js"></script>
 
     
+    <!-- MODAL -->
+    
+        <script src="{{$APPS['BASE_URL']}}/assets/temp/scripts/popper.min.js"></script>
+        <script src="{{$APPS['BASE_URL']}}/assets/temp/scripts/bootstrap.min.js"></script>
+        <script src="{{$APPS['BASE_URL']}}/assets/temp/scripts/jquery-ui.min.js"></script>
+
+        <!-- <script src="{{$APPS['BASE_URL']}}/assets/temp/scripts/perfect-scrollbar.min.js"></script> -->
+        <!-- End Global Scripts -->
+
+        <!-- selectpicker -->
+        <!-- <script src="{{$APPS['BASE_URL']}}/assets/js/dashboard/dropdown-search/bootstrap-select.min.js"></script> -->
+
+        <!-- Begin Custom Scripts -->
+        <!-- <script src="{{$APPS['BASE_URL']}}/assets/temp/scripts/custom.js"></script> -->
+        <!-- End Custom Scripts -->
+
+    <!-- END MODAL -->
+
     <script>
         $(document).ready(function(){
 
@@ -262,6 +342,17 @@
                 return false;
             });
 
+
+            $(".cmd-modal-payment").click(function(){
+                var $button = $(this),
+                $form = $button.parents("form"),
+                $orderCode = $form.find("*[name='order_code']").val(),
+                $modal = $($button.attr("data-target"));
+
+                console.log($orderCode);
+                $modal.find("*[name='order_code']").val($orderCode);
+                // $modal.find("*[name='openpage']").val("")
+            });
 
             return false;
         })
