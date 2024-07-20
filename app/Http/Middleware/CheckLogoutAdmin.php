@@ -18,6 +18,11 @@ class CheckLogoutAdmin
      */
     public function handle(Request $request, Closure $next)
     {
+        if(Cookie::get('email') == null){
+
+            return redirect('/admin');
+        }
+
         if( Cookie::get('email') != null){
 
             $getAccount = new \App\Http\Controllers\account\manage;

@@ -9,6 +9,9 @@
             "search_status" :   0,
             "search_text"   :   "",
             "sort"          :   1
+        },
+        "APP"   : {
+            "URL"   : "{{$APPS['BASE_URL']}}"
         }
     }
 </script>

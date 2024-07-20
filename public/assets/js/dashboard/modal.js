@@ -369,6 +369,7 @@ $('body').on('click', 'button[data-dismiss="modal"]', function(e)
     modal.find('button.modal-submit').attr('role', 'on');
     modal.find(".loading-document").removeClass("hide");
     defaultmodalform(modal);
+
     
 });
 
@@ -522,11 +523,11 @@ $('body').on('click', '#modaladdress button.modal-submit', function(e)
 
 // validator address
 
-$.validator.addMethod("notnullhidden", function(value, element, arg)
-{
-   return arg !== value;
+// $.validator.addMethod("notnullhidden", function(value, element, arg)
+// {
+//    return arg !== value;
 
-}, "Value must not equal arg.");
+// }, "Value must not equal arg.");
 
 var addressvalidate = 
 {
@@ -760,19 +761,19 @@ $('body').on('click', '[data-target="#modalcustomers"]', function(e)
 
 
 
-// function add new  customer and validate
-$.validator.addMethod("customemail", function(t, n)
-{
-        t=t.trim();
-        var r= $(n).prop("required"),
-        i=/^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/.test(t);
-        return r?""!==t&&i:""===t||i
-}, "Sorry, I've enabled very strict email validation");
+// // function add new  customer and validate
+// $.validator.addMethod("customemail", function(t, n)
+// {
+//         t=t.trim();
+//         var r= $(n).prop("required"),
+//         i=/^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/.test(t);
+//         return r?""!==t&&i:""===t||i
+// }, "Sorry, I've enabled very strict email validation");
 
-$.validator.addMethod("selectoptmin", function(value, element, arg)
-{
-    return arg !== value;
-}, "Value must not equal arg.");
+// $.validator.addMethod("selectoptmin", function(value, element, arg)
+// {
+//     return arg !== value;
+// }, "Value must not equal arg.");
 
 
 $('body').on('click', '#modalcustomers button.modal-submit', function(e)

@@ -53,6 +53,9 @@ Route::group(['prefix' => '/admin', 'middleware' => 'CheckLogoutAdmin'], functio
     Route::get('/home', $root . '\admin\index@main');
     Route::get('/home/orders', $root . '\admin\index@orders');
     // Route::get('/login', $root . '\access\index@login');
+
+    Route::get('/home/product', $root . '\product\index@productPage');
+
 });
 
 
@@ -73,7 +76,11 @@ Route::group(['prefix' => '/api'], function() use ($root)
     // HOME ORDERS
     Route::get('/orders/table', $root . '\orders\table@main');
 
-    
+    // PRODUCT
+    Route::get('/product/table', $root . '\product\table@main');
+    Route::get('/product/view', $root . '\product\index@view');
+    Route::post('/product/create', $root . '\product\manage@main');
+        
 });
 
 
