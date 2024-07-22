@@ -15,9 +15,9 @@ class globals extends Controller
             'BASE_URL'  =>  $this->BASE_URL(),
             'ICON'      =>  '/assets/icon/logo-toko.png',
             'LOGO'      =>  '/assets/icon/logo-toko.png',
-            'CREATED'   =>  '&copy; ' . date('Y')
+            'CREATED'   =>  '&copy; ' . date('Y'),
+            'URL_CURRENT'   =>  url()->current()
         ];
-
 
         return $data;
     }
@@ -83,6 +83,13 @@ class globals extends Controller
         $code = date('Ymd', time()) . "/" . $length . "/INV";
 
         return $code;
+
+    }
+
+    public function defaultDate($request){
+        $date = date('d-m-Y', strtotime($request));
+
+        return $date;
 
     }
 

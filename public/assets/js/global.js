@@ -2129,6 +2129,22 @@ function defaultCategori(w){
     form.find(".val-emoty").val("");
 }
 
+function modalPreviewImg()
+{
+    var modal = '';
+
+    modal += '<div class="m-preview-img area-prev-image"><div class="preview-bck"></div><div class="in-preview"><div class="area-preview">';
+
+        modal += '<div class="l-preview"><div class="img-preview"><div class="arimage-resize prev-img"></div><a href="#" class="xclose close-previmg" role="off"><div class="tbl"><div class="intbl"><div class="span flaticon2-cross"></div></div></div></a></div></div>';
+
+        modal += '<div class="r-preview"><div class="div header"><span><b>Bukti Bayar</b></span> </div>';
+
+        modal += '<div class="div bdy"><div class="div clr-float list-xdp"><div class="fl-left"><span class="label">Invoice</span></div><div class="fl-right prev-invoice">#<b>---</b></div></div><div class="div clr-float list-xdp"><div class="fl-left"><span class="label">Diupload oleh</span></div><div class="fl-right prev-name">---</div></div><div class="div clr-float list-xdp"><div class="fl-left"><span class="label">Tanggal</span></div><div class="fl-right prev-date">---</div></div></div></div>';
+
+    modal += '</div></div></div>';
+
+    return modal;
+}
 // END FILTER CATEGORI
 
 // DOCUMENT READY

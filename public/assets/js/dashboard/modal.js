@@ -356,6 +356,7 @@ function setInsDropdown(i,e,x){
 // CLOSE MODAL
 $('body').on('click', 'button[data-dismiss="modal"]', function(e)
 {
+    // e.prevenetDefault();
 
     var button = $(this),
     modal = button.parents('.modal');
@@ -370,7 +371,6 @@ $('body').on('click', 'button[data-dismiss="modal"]', function(e)
     modal.find(".loading-document").removeClass("hide");
     defaultmodalform(modal);
 
-    
 });
 
 
@@ -380,6 +380,7 @@ $('body').on('click', '.new-modal.show button.modal-close', function(e)
     modal = button.parents(".new-modal");
 
     defaultmodalform(modal);
+    console.log("close");
 });
 
 // VALIDATE

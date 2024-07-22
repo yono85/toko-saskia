@@ -90,6 +90,8 @@ class manage extends Controller
                 $Create->payment_norek =   '';
                 $Create->payment_date =   '';
                 $Create->payment_images =   '';
+                $Create->paid_user_id   =   0;
+                $Create->paid_date = '';
                 $Create->discount       =   0;
                 $Create->status         =   1;
                 $Create->save();
@@ -324,5 +326,36 @@ class manage extends Controller
             return response()->json($data, 500);
         }
         
+    }
+
+    // 
+    public function verification(Request $request){
+        try{
+
+            $update = tblOrders::where([
+                'code'  =>  trim($request->order_code)
+            ])
+            ->update([
+                'paid_status'   =>  1,
+                'paid_date'     =>  date('Y-m-d H:i:s', time()),
+                'paid_user_id'  =>  trim($request->user_id)
+            ]);
+
+            $data = [
+                'message'   =>  'Data berhasil diproses',
+                'code'      =>  200,
+                'data'      =>  ''
+            ];
+
+            return response()->json($data, 200);
+        }
+        catch(Exception $error){
+            $data = [
+                'message'   =>  $error->getMessage(),
+                'code'      =>  500
+            ];
+
+            return response()->json($data, 500);
+        }
     }
 }

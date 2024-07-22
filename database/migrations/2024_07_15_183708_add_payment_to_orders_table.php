@@ -20,6 +20,8 @@ class AddPaymentToOrdersTable extends Migration
             $table->string('payment_norek');
             $table->string('payment_date');
             $table->text('payment_images');
+            $table->foreignUuid('paid_user_id');
+            $table->string('paid_date');
         });
     }
 
@@ -37,6 +39,8 @@ class AddPaymentToOrdersTable extends Migration
             $table->dropColumn('payment_norek');
             $table->dropColumn('payment_date');
             $table->dropColumn('payment_images');
+            $table->foreignUuid('paid_user_id');
+            $table->string('paid_date');
         });
     }
 }

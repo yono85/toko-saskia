@@ -5275,9 +5275,14 @@ a.slide[slide="on"] .arslide{
     color: #fff;
 }
 
-.list-xdp .status-payment b.paid{
+.list-xdp .status-payment b.paid, .list-xdp .status-payment b.success{
     background-color: #096A61;
 }
+
+.list-xdp .status-payment b.failed{
+    background-color: red;
+}
+
 
 .list-xdp .status-payment b.paid::before{
     content: "\f1af";

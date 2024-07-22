@@ -648,13 +648,15 @@
 
                                             <div class="dropdown-menu">
 
-                                                <!-- <a class="dropdown-item cmd-modal-widget" data-toggle="modal" data-target="#modal-create-formula" data-type="edit" href="#" role="off"> -->
-                                                <a class="dropdown-item cmd-modal-widget" target="_blank" href="{link_checkout}">
+                                                @if($account->level == 2)
+                                                <!-- <a class="dropdown-item cmd-modal-widget" target="_blank" href="{link_checkout}"> -->
+                                                <a class="dropdown-item color-green cmd-modal-widget" data-toggle="modal" data-target="#modal-verification-payment" href="#" role="off">
+
                                                     <span>Detail Pesanan</span>
                                                     <span class="ic sli_icon-bag"></span>
                                                 </a>
 
-                                                <div class="div {area-upload}"  >
+                                                <div class="div {area-upload}">
                                                     <div class="dropdown-divider"></div>
 
                                                     <a class="dropdown-item cmd-modal-widget color-orange" data-toggle="modal" data-target="#modal-payment" data-type="edit" href="#" role="off">
@@ -662,11 +664,13 @@
                                                         <span class="ic sli_icon-cloud-upload"></span>
                                                     </a>
                                                 </div>
+                                                <!-- <div class="dropdown-divider"></div> -->
 
+                                                @endif
+                                                
                                                 @if($account->level == 1)
-                                                <div class="dropdown-divider"></div>
 
-                                                <a class="dropdown-item color-orange cmd-modal-widget" data-toggle="modal" data-target="#modal-verification-payment" href="#" role="off">
+                                                <a class="dropdown-item color-green cmd-modal-widget" data-toggle="modal" data-target="#modal-verification-payment" href="#" role="off">
                                                 
                                                     <span>Verifikasi</span>
                                                     <span class="ic sli_icon-credit-card"></span>
@@ -759,7 +763,7 @@ $(document).ready(function(){
             listx = listx.replace("{token}", item.code);
             listx = listx.replace("{invoice}", item.invoice);
             listx = listx.replace("{name}", item.user.name);
-            listx = listx.replace("{notes}", item.notes);
+            listx = listx.replace("{notes}", item.notes === "" ? "---" : item.notes);
             listx = listx.replace("{address}", item.address);
             listx = listx.replace("{date}", item.date);
             listx = listx.replace("{email}", item.user.email);
@@ -794,6 +798,8 @@ $(document).ready(function(){
             $modal.find("*[name='openpage']").val('table');
 
     });
+
+    
 
     return false;
 })

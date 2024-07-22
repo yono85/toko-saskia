@@ -9103,12 +9103,12 @@ Moby Theme Variables
           .moby__aside-holder .moby__side-bar .moby__drawer-menu li a:hover,
           .moby__aside-holder .moby__side-bar .moby__drawer-menu li .collapsed:hover {
             color: #689df6; 
-            color: #FDD746;
+            color: #FDD746 !important;
         }
             .moby__aside-holder .moby__side-bar .moby__drawer-menu li a:hover .icon,
             .moby__aside-holder .moby__side-bar .moby__drawer-menu li .collapsed:hover .icon {
               color: #689df6; 
-            color: #FDD746;
+            color: #FDD746 !important;
 
           }
           .moby__aside-holder .moby__side-bar .moby__drawer-menu li a .icon,
@@ -9155,12 +9155,12 @@ Moby Theme Variables
           .moby__aside-holder .moby__side-bar .moby__drawer-menu li a.active,
           .moby__aside-holder .moby__side-bar .moby__drawer-menu li .collapsed.active {
             color: #689df6; 
-            color: #FDD746;
+            color: #FDD746 !important;
           }
             .moby__aside-holder .moby__side-bar .moby__drawer-menu li a.active .icon,
             .moby__aside-holder .moby__side-bar .moby__drawer-menu li .collapsed.active .icon {
               color: #689df6; 
-            color: #FDD746;
+            color: #FDD746 !important;
 
           }
             .moby__aside-holder .moby__side-bar .moby__drawer-menu li a.active[aria-expanded="true"] .arrow-icon,

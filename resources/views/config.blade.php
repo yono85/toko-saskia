@@ -11,7 +11,8 @@
             "sort"          :   1
         },
         "APP"   : {
-            "URL"   : "{{$APPS['BASE_URL']}}"
+            "URL"   : "{{$APPS['BASE_URL']}}",
+            "CURRENT": "{{$APPS['URL_CURRENT']}}"
         }
     }
 </script>

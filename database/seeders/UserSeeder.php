@@ -9,6 +9,7 @@ use App\Http\Controllers\config\globals as Config;
 // users
 use App\Models\User as tblUsers;
 use App\Models\products as tblProducts;
+use DB;
 
 class UserSeeder extends Seeder
 {
@@ -19,7 +20,9 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        return $this->createProduct();
+        return $this->createUsers();
+
+        // return $this->createProduct();
         // $Config = new Config;
 
         // $Create = new tblProducts;
@@ -35,13 +38,20 @@ class UserSeeder extends Seeder
     // create users
     public function createUsers(){
         //
-        $user = new tblUsers;
-        $user->level = 2;
-        $user->name = "Users";
-        $user->email = "u@g.com";
-        $user->password = Hash::make('123456');
-        $user->save();
+        // $user = new tblUsers;
+        // $user->level = 2;
+        // $user->name = "Users";
+        // $user->email = "u@g.com";
+        // $user->password = Hash::make('123456');
+        // $user->save();
 
+        $update = DB::table('users')
+        ->where([
+            'email'    =>  'u@g.com'
+        ])
+        ->update([
+            'password'  =>  Hash::make('123123')
+        ]);
 
         // tblUsers::create([
         //     'level' =>  2,

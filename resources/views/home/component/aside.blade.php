@@ -20,7 +20,7 @@
 
             <!-- Start of Dashboard -->
             <li>
-                <a href="{{$account->level === 1 ? '/admin/home' : '/home'}}" class="" >
+                <a href="{{$APPS['BASE_URL'] . ($account->level === 1 ? '/admin/home' : '/home')}}" class="" >
                     <i class="icon fa flaticon2-line-chart">
                         <span class="path1"></span>
                     </i>
@@ -42,7 +42,7 @@
                 <div class="collapse show" id="collaps2">
                     <ul>
                         <li>
-                            <a href="{{$account->level === 1 ? '/admin/home/orders' : '/home/orders'}}" data-role="collapse"><span>Pesanan Saya</span></a>
+                            <a href="{{$APPS['BASE_URL'] . ($account->level === 1 ? '/admin/home/orders' : '/home/orders') }}" data-role="collapse"><span>Pesanan Saya</span></a>
                         </li>
                     </ul>
                 </div>
@@ -61,7 +61,7 @@
                 <div class="collapse show" id="collaps2">
                     <ul>
                         <li>
-                            <a href="/admin/home/product" data-role="collapse"><span>Daftar Produk</span></a>
+                            <a href="{{$APPS['BASE_URL']}}/admin/home/product" data-role="collapse"><span>Daftar Produk</span></a>
                         </li>
                     </ul>
                 </div>
@@ -73,7 +73,8 @@
 </div>
 
 <script>
-// var CURRENT = CONFIG.APPS.URL.CURRENT;
-// $('.moby__side-bar ul').find('a[href="'+CURRENT+'"]').addClass('active');
-// $('.moby__side-bar ul').find('a[href="'+CURRENT+'"]').attr('aria-expanded', 'true');
+var CURRENT = "{{$APPS['URL_CURRENT']}}";
+$('.moby__side-bar ul').find('a[href="'+CURRENT+'"]').addClass('active');
+$('.moby__side-bar ul').find('a[href="'+CURRENT+'"]').attr('aria-expanded', 'true');
+// console.log(CURRENT);
 </script>

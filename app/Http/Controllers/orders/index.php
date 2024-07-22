@@ -185,10 +185,11 @@ class index extends Controller
     public function dataOrders($request){
         try{
 
+            $Config = new Config;
             $getOrders = tblOrders::from('orders as o')
             ->select(
-                'o.id', 'o.code', 'o.invoice', 'o.subtotal', 'o.total', 'o.discount', 'o.address', 'o.notes', 'o.payment_metode', 'o.paid_status', 'o.status', 'o.payment_bank',
-                'pb.norek as to_norek', 'pb.pemilik as to_owner', 'pb.images as to_images'
+                'o.id', 'o.code', 'o.invoice', 'o.subtotal', 'o.total', 'o.discount', 'o.address', 'o.notes', 'o.payment_metode', 'o.paid_status', 'o.status', 'o.payment_bank', 'o.payment_owner', 'o.payment_norek', 'o.payment_date', 'o.payment_images',
+                'pb.norek as to_norek', 'pb.pemilik as to_owner', 'pb.images as to_images', 'o.created_at'
             )
             ->leftJoin('payment_banks as pb', function($join){
                 $join->on('pb.name', '=', 'o.payment_metode');
@@ -240,10 +241,15 @@ class index extends Controller
                         'images'        =>  $getOrders->to_images
                     ],
                     'from'      =>  [
-                        'bank'         =>  $getOrders->payment_bank
+                        'bank'         =>  strtoupper($getOrders->payment_bank),
+                        'norek'         =>  $getOrders->payment_norek,
+                        'owner'         =>  $getOrders->payment_owner,
+                        'date'          =>  $getOrders->payment_date,
+                        'images'        =>  $getOrders->payment_images
                     ]
                 ],
                 'items'     =>  json_decode($getItems),
+                'date'      =>  $Config->defaultDate($getOrders->created_at),
                 'status'    =>  $getOrders->status
             ];
 
@@ -260,4 +266,37 @@ class index extends Controller
         }
     }
 
+    //
+    public function view(Request $request){
+        try{
+            
+            $getData = $this->dataOrders($request->q);
+
+            if($getData == null){
+                $data = [
+                    'message'   =>  'Data tidak ditemukan',
+                    'code'      =>  404
+                ];
+
+                return response()->json($data, 404);
+            }
+            
+            // success
+            $data = [
+                'message'   =>  'Success',
+                'code'      =>  200,
+                'data'      =>  $getData
+            ];
+
+            return response()->json($data, 200);
+        }
+        catch(Exception $error){
+            $data = [
+                'message'   =>  $error->getMessage(),
+                'code'      =>  500
+            ];
+
+            return response()->json($data, 500);
+        }
+    }
 }

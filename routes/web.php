@@ -75,6 +75,8 @@ Route::group(['prefix' => '/api'], function() use ($root)
 
     // HOME ORDERS
     Route::get('/orders/table', $root . '\orders\table@main');
+    Route::get('/orders/view', $root . '\orders\index@view');
+    Route::post('/orders/payment/verification', $root . '\orders\manage@verification');
 
     // PRODUCT
     Route::get('/product/table', $root . '\product\table@main');

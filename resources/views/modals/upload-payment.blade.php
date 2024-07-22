@@ -47,6 +47,18 @@
                                                             <li aria-selected="false" dataid="bca" class="">
                                                                 <button role="off" dataid="bca" aria-role="true"><span>BCA</span></button>
                                                             </li>
+                                                            <li aria-selected="false" dataid="bni" class="">
+                                                                <button role="off" dataid="bni" aria-role="true"><span>BNI</span></button>
+                                                            </li>
+                                                            <li aria-selected="false" dataid="bri" class="">
+                                                                <button role="off" dataid="bri" aria-role="true"><span>BRI</span></button>
+                                                            </li>
+                                                            <li aria-selected="false" dataid="mandiri" class="">
+                                                                <button role="off" dataid="mandiri" aria-role="true"><span>MANDIRI</span></button>
+                                                            </li>
+                                                            <li aria-selected="false" dataid="permata" class="">
+                                                                <button role="off" dataid="permata" aria-role="true"><span>Permata</span></button>
+                                                            </li>
                                                         </ul>
                                                     </div>
                                                     <input type="hidden" class="value-dropdown txt-def-empty" name="payment_bank" value="-1">
@@ -205,7 +217,7 @@ $(document).ready(function(){
     });
 
 
-    $("#form-submit").submit(function(){
+    $("#modal-payment form").submit(function(){
         var $form = $(this),
         $modal = $form.parents(".new-modal"),
         $button = $modal.find(".modal-submit");
