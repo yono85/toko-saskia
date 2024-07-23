@@ -8,7 +8,7 @@
         </a>
     </div>
     <div class="text-center mt-4 name">
-        LOGIN ADMIN
+        LOGIN ADMINXXX
     </div>
     <form class="p-3 mt-3" action="/api/login" method="POST" id="form-submit">
         <div class="box-field mg-b20">
