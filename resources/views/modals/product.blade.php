@@ -173,7 +173,7 @@
                                         <div class="div">
                                             <span class="label font-wg25">Deskripsi:</span>
                                             <div class="div">
-                                                <textarea name="description" class="form-control fsize14" placeholder="Isi deskripsi disini..."></textarea>
+                                                <textarea name="description" class="form-control fsize14 txt-def-empty" placeholder="Isi deskripsi disini..."></textarea>
                                             </div>
                                         </div>
                                     </div>
@@ -184,7 +184,7 @@
                         </div>
 
                         <input type="hidden" name="user_id" value="{{$account['id']}}" >
-                        <input type="hidden" name="code" value="" class="empty">
+                        <input type="hidden" name="code" value="" class="txt-def-empty">
                         <input type="hidden" name="type" value="">
                         @csrf()
                     </form>
