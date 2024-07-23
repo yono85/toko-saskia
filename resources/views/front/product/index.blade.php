@@ -9,7 +9,7 @@
         </div>
         <div class="row">
 
-            @include('front.product.list')
+           @include('front.product.list')
 
         </div>
     </div>

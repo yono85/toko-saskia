@@ -17,6 +17,8 @@ class index extends Controller
     public function list(Request $request){
         try{
 
+            $Config = new Config;
+
             $Account = null;
 
             if(Cookie::get('email')){
@@ -25,9 +27,23 @@ class index extends Controller
                 $Account = $Account->dataUser(Cookie::get('email'));
             }
 
+            // $data = [
+            //     'account'   =>  $Account
+            // ];
+
+            // data product
+            $getProduct = new \App\Http\Controllers\product\index;
+            $getProduct = $getProduct->list();
+
+            
             $data = [
-                'account'   =>  $Account
+                'TITLE'     =>  'Selamat datang di',
+                'APPS'      =>  $Config->APPS(),
+                'account'   =>  $Account,
+                'product'   =>  $getProduct
             ];
+
+            // dd($data);
 
             return view('front.product.index')->with($data);
         }

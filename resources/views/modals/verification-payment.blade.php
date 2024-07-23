@@ -278,7 +278,6 @@ $(document).ready(function(){
             console.log(n);
         });
 
-        // console.log($URL);
     })
 
 
