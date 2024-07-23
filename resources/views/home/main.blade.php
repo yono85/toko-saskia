@@ -42,9 +42,9 @@
 
                                         <div class="date-section">
 
-                                            <form action="" id="form-dashboard">
+                                            <form action="/api/dashboard/report" id="form-dashboard" method="GET">
 
-                                                <button class="btn-r is-loading green cmd-getReload" role="off">
+                                                <button type="submit" class="btn-r is-loading green cmd-getReload cmd-submit" role="off">
                                                     <span class="flaticon2-refresh-arrow"></span>
                                                 </button>
     
@@ -62,6 +62,7 @@
                                                 </div>
                                                 
                                                 <div class="ar-selected area-list-company hide">
+
                                                     <div class="ddwn area-ddwn ar-content keep">
                                                         <button class="btn br-rds8 cddwn" role="off">
                                                             <label class="mg-b0"><span class="fsize14 color-black">Company ID</span></label>
@@ -82,7 +83,9 @@
                                                     </div>
                                                 </div>
 
-                                                <input type="hidden" name="id" value="">
+                                                <input type="hidden" name="uid" value="{{$account->level === 2 ? $account->id : '-1'}}">
+                                                <input type="hidden" name="date" value="" >
+
 
                                             </form>
 
@@ -107,8 +110,107 @@
     <!-- Moby Stat Widget Card Ends -->
     <div id="moby__stat-widget" class="moby__stat-card stat-cards-shadow">
         <div class="row">
+
             <!-- #1 Total Visits Card Column -->
-            <div class="col-lg-3 col-md-6 col-sm-6 col-12 res-box pd-lr-box" id="seling" role="on">
+            <div class="col-lg-4 col-md-6 col-sm-6 col-12 res-box pd-lr-box card-box" id="card-orders-success" role="off">
+
+                <div class="card stat-card body-h-100 success">
+
+                    <div class="area-child-box">
+
+                        <!-- <div class="card-header"></div> -->
+                        <div class="card-body">
+
+                            <h3 class="card-title">
+                                <span class="ctr h14 br-rds4 w60p">
+                                    <div class="divH">
+                                        <span class="splash-tbl"></span>
+                                    </div>
+                                </span>
+                            </h3>
+                            <span class="card-sub-title">
+                                <span class="ctr h14 br-rds4 w33p">
+                                    <div class="divH">
+                                        <span class="splash-tbl"></span>
+                                    </div>
+                                </span>
+                            </span>
+                            <div class="circle-progress-bar mg-b10">
+                                <div class="crcl br-rds50p">
+                                    <div class="divH">
+                                        <span class="splash-tbl"></span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="card-footer">
+                                <ul class="card-footer-list">
+                                    <li>
+                                        <span class="ctr h14 br-rds4 w60p">
+                                            <div class="divH">
+                                                <span class="splash-tbl"></span>
+                                            </div>
+                                        </span>
+                                    </li>
+                                    <li>
+                                        <span class="ctr h14 br-rds4 w60p">
+                                            <div class="divH">
+                                                <span class="splash-tbl"></span>
+                                            </div>
+                                        </span>
+                                    </li>
+                                </ul>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- <div class="card-header"></div> -->
+
+                    <div class="card-body">
+                        <h3 class="card-title">Pesanan Berhasil</h3>
+                        <span class="card-sub-title v-items">0</span>
+                        
+                        <div class="circle-progress-bar">
+                            <div class="progress" data-percentage="0" data-value="0">
+                                <span class="progress-left">
+                                    <span class="progress-bar"></span>
+                                </span>
+                                <span class="progress-right">
+                                    <span class="progress-bar"></span>
+                                </span>
+                                <div class="progress-value">
+                                    <i class="sli_icon-bag progress-bar-icon icon"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card-footer">
+                        <ul class="card-footer-list">
+                            <li>
+                                <!-- <i class="card-footer-icon icon sli_icon-check"><span class="path1"></span><span class="path2"></span></i> -->
+
+                                <span class="card-footer-num">
+                                    <span class="v-total">0</span>
+                                    <span class="card-footer-text">Total (Rp)</span>
+                                </span>
+                            </li>
+                            <li class="hide">
+                                <!-- <i class="card-footer-icon icon sli_icon-close"><span class="path1"></span><span class="path2"></span></i> -->
+                                <span class="card-footer-num">
+                                    <span class="v-second">0</span>
+                                    <span class="card-footer-text">Cancel</span>
+                                </span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- #2 Total Visits Card Column -->
+            <div class="col-lg-4 col-md-6 col-sm-6 col-12 res-box pd-lr-box card-box" id="card-orders-cancel" role="off">
 
                 <div class="card stat-card body-h-100 danger">
 
@@ -163,103 +265,8 @@
                     <!-- <div class="card-header"></div> -->
 
                     <div class="card-body">
-                        <h3 class="card-title">Pesanan Berhasil</h3>
-                        <span class="card-sub-title v-total">0</span>
-                        <div class="circle-progress-bar">
-                            <div class="progress" data-percentage="0" data-value="0">
-                                <span class="progress-left">
-                                    <span class="progress-bar"></span>
-                                </span>
-                                <span class="progress-right">
-                                    <span class="progress-bar"></span>
-                                </span>
-                                <div class="progress-value">
-                                    <i class="sli_icon-chemistry progress-bar-icon icon"></i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="card-footer">
-                        <ul class="card-footer-list">
-                            <li>
-                                <i class="card-footer-icon icon sli_icon-check"><span class="path1"></span><span class="path2"></span></i>
-                                <span class="card-footer-num">
-                                    <span class="v-paid">0</span>
-                                    <span class="card-footer-text">Paid</span>
-                                </span>
-                            </li>
-                            <li>
-                                <i class="card-footer-icon icon sli_icon-close"><span class="path1"></span><span class="path2"></span></i>
-                                <span class="card-footer-num">
-                                    <span class="v-cancel">0</span>
-                                    <span class="card-footer-text">Cancel</span>
-                                </span>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-
-            </div>
-
-            <!-- #2 Total Visits Card Column -->
-            <div class="col-lg-3 col-md-6 col-sm-6 col-12 res-box pd-lr-box" id="customers" role="on">
-
-                <div class="card stat-card body-h-100 primary">
-
-                    <div class="area-child-box">
-                        <!-- <div class="card-header"></div> -->
-                        <div class="card-body">
-
-                            <h3 class="card-title">
-                                <span class="ctr h14 br-rds4 w60p">
-                                    <div class="divH">
-                                        <span class="splash-tbl"></span>
-                                    </div>
-                                </span>
-                            </h3>
-                            <span class="card-sub-title">
-                                <span class="ctr h14 br-rds4 w33p">
-                                    <div class="divH">
-                                        <span class="splash-tbl"></span>
-                                    </div>
-                                </span>
-                            </span>
-                            <div class="circle-progress-bar mg-b10">
-                                <div class="crcl br-rds50p">
-                                    <div class="divH">
-                                        <span class="splash-tbl"></span>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="card-footer">
-                                <ul class="card-footer-list">
-                                    <li>
-                                        <span class="ctr h14 br-rds4 w60p">
-                                            <div class="divH">
-                                                <span class="splash-tbl"></span>
-                                            </div>
-                                        </span>
-                                    </li>
-                                    <li>
-                                        <span class="ctr h14 br-rds4 w60p">
-                                            <div class="divH">
-                                                <span class="splash-tbl"></span>
-                                            </div>
-                                        </span>
-                                    </li>
-                                </ul>
-                            </div>
-
-                        </div>
-                    </div>
-
-                    <!-- <div class="card-header"></div> -->
-
-                    <div class="card-body">
                         <h3 class="card-title">Pesanan Batal</h3>
-                        <span class="card-sub-title v-total">0</span>
+                        <span class="card-sub-title v-items">0</span>
                         <div class="circle-progress-bar">
                             <div class="progress" data-percentage="0" data-value="0">
                                 <span class="progress-left">
@@ -278,16 +285,16 @@
                     <div class="card-footer">
                         <ul class="card-footer-list">
                             <li>
-                                <i class="card-footer-icon icon sli_icon-check"></i>
+                                <!-- <i class="card-footer-icon icon sli_icon-check"></i> -->
                                 <span class="card-footer-num">
                                     <span class="v-total">0</span>
-                                    <span class="card-footer-text">Paid</span>
+                                    <span class="card-footer-text">Total (Rp)</span>
                                 </span>
                             </li>
-                            <li>
-                                <i class="card-footer-icon icon sli_icon-close"></i>
+                            <li class="hide">
+                                <!-- <i class="card-footer-icon icon sli_icon-close"></i> -->
                                 <span class="card-footer-num">
-                                    <span class="v-cancel">0</span>
+                                    <span class="v-second">0</span>
                                     <span class="card-footer-text">Cancel</span>
                                 </span>
                             </li>
@@ -298,9 +305,9 @@
             </div>
 
             <!-- #3 Average Sales Column -->
-            <div class="col-lg-3 col-md-6 col-sm-6 col-12 res-box pd-lr-box" id="users" role="on">
+            <div class="col-lg-4 col-md-6 col-sm-6 col-12 res-box pd-lr-box card-box" id="card-product" role="off">
 
-                <div class="card stat-card body-h-100 success">
+                <div class="card stat-card body-h-100 warning">
 
                     <div class="area-child-box">
                         <!-- <div class="card-header"></div> -->
@@ -364,7 +371,7 @@
                                     <span class="progress-bar"></span>
                                 </span>
                                 <div class="progress-value">
-                                    <i class="sli_icon-book-open progress-bar-icon icon"></i>
+                                    <i class="sli_icon-bag progress-bar-icon icon"></i>
                                 </div>
                             </div>
                         </div>
@@ -373,27 +380,28 @@
                     <div class="card-footer">
                         <ul class="card-footer-list">
                             <li>
-                                <i class="card-footer-icon icon sli_icon-check"><span class="path1"></span><span class="path2"></span></i>
+                                <!-- <i class="card-footer-icon icon sli_icon-check"><span class="path1"></span><span class="path2"></span></i> -->
                                 <span class="card-footer-num">
-                                    <span class="v-total">0</span>
-                                    <span class="card-footer-text">Total</span>
+                                    <span class="v-active">0</span>
+                                    <span class="card-footer-text">Active</span>
                                 </span>
                             </li>
-                            <li>
-                                <i class="card-footer-icon icon sli_icon-clock"><span class="path1"></span><span class="path2"></span></i>
+                            <li >
+                                <!-- <i class="card-footer-icon icon sli_icon-clock"><span class="path1"></span><span class="path2"></span></i> -->
                                 <span class="card-footer-num">
-                                    <span class="v-verify">0</span>
-                                    <span class="card-footer-text">Progress</span>
+                                    <span class="v-nonactive">0</span>
+                                    <span class="card-footer-text">Non Active</span>
                                 </span>
                             </li>
                         </ul>
                     </div>
 
                 </div>
+
             </div>
 
             <!-- #4 New Members Column -->
-            <div class="col-lg-3 col-md-6 col-sm-6 col-12 res-box pd-lr-box" id="returns" role="on">
+            <div class="col-lg-4 col-md-6 col-sm-6 col-12 res-box pd-lr-box hide" id="returns" role="on">
                 
                 <div class="card stat-card body-h-100 warning">
 
@@ -488,6 +496,7 @@
                 </div>
 
             </div>
+
         </div>
     </div>
 
@@ -558,7 +567,7 @@
     </div>
 
     <!-- #2 Moby Cards Row -->
-    <div class="row">
+    <div class="row hide">
 
         <!-- #3 Page view by Page title -->
         <div class="col-lg-6 col-md-12 col-12 res-box" id="rankseling" role="off">
@@ -1146,7 +1155,7 @@
 
     </div>
 
-    <div class="row">
+    <div class="row hide">
 
 
         <!-- #3 Page view by Page title -->
@@ -1737,8 +1746,12 @@
 
     </div>
 
-
 </main>
+
+<!-- Begin Chart Scripts -->
+<script src="/assets/temp/scripts/apexcharts.min.js"></script>
+<script src="/assets/temp/pages/classic/charts.js"></script>
+<!-- End Chart Scripts -->
 
 <script>
 $(document).ready(function(){
@@ -1752,6 +1765,7 @@ $(document).ready(function(){
     })
     .on("change", function () {
         to.datepicker("option", "minDate", chkDate(this));
+        insertDate();
         // cekrangedate(from.val(),to.val());
     }),
     to = $("#end-date")
@@ -1763,6 +1777,8 @@ $(document).ready(function(){
     })
     .on("change", function () {
         from.datepicker("option", "maxDate", chkDate(this));
+        insertDate();
+        // console.log(from.val());
         // cekrangedate(from.val(),to.val());
     });
 
@@ -1778,8 +1794,166 @@ $(document).ready(function(){
             date = null;
         }
 
+        // console.log(date);
         return date;
+
     }
+    
+
+    function insertDate(){
+        var $startDate = $("#start-date").val(),
+        $endDate = $("#end-date").val(),
+        $date = $("#form-dashboard").find("*[name='date']");
+
+        if( $startDate !== "" && $endDate !== ""){
+            $date.val(changeDate($startDate,$endDate));
+        }
+    }
+
+    $("#form-dashboard").submit(function(){
+        var $form = $(this),
+        $button = $form.find("button.cmd-submit");
+
+        if( $button.attr("role") === "off"){
+            $button.attr("role", "on");
+
+            $(".card-box").attr("role", "off");
+            getDataReport($form);
+
+            $button.attr("role", "off");
+
+        }
+    });
+
+    function getDataReport(){
+        var $form = $("#form-dashboard");
+        var $t = ajaxFormRequest($form);
+        $("#sCharts").empty();
+        $t.success(function(n){
+            // console.log(n);
+            var $data = n.data;
+            // console.log($data);
+            reportCard($data.card);
+            reportChart($data.chart)
+        })
+        .error(function(n){
+            console.log(n);
+        })
+    }
+
+    getDataReport();
+
+    function reportCard(e){
+        // console.log(e);
+        var $data = e;
+
+        $("#card-orders-success").find(".v-items").html(formatRupiah($data.orders.success.item) );
+        $("#card-orders-success").find(".v-total").html(formatRupiah($data.orders.success.price, "Rp") );
+
+        $("#card-orders-cancel").find(".v-items").html(formatRupiah($data.orders.cancel.item) );
+        $("#card-orders-cancel").find(".v-total").html(formatRupiah($data.orders.cancel.price, "Rp") );
+
+        $("#card-product").find(".v-total").html(formatRupiah($data.products.total) );
+        $("#card-product").find(".v-active").html(formatRupiah($data.products.active) );
+        $("#card-product").find(".v-nonactive").html(formatRupiah($data.products.nonactive) );
+
+        $(".card-box").attr("role", "on");
+
+    }
+
+    function reportChart(e){
+        console.log(e);
+        newCharts(e);
+        $("#charts").attr("role", "on");
+    }
+
+    function newCharts(n)
+    {
+        (new ApexCharts(document.querySelector("#sCharts"), {
+            chart: {
+                height: 420,
+                type: 'area',
+                fontFamily: 'Nunito Sans, sans-serif',
+                toolbar: {
+                    show: false
+                },
+                dropShadow: {
+                    enabled: true,
+                    enabledOnSeries: undefined,
+                    top: 250,
+                    left: 0,
+                    blur: 10,
+                    color: '#fff',
+                    opacity: 0.7
+                }
+            },
+            dataLabels: {
+                enabled: false
+            },
+            stroke: {
+                curve: 'smooth',
+            width: 3
+            },
+            xaxis: {
+            //   categories: ["Jan","Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+                categories:n.Date
+            },
+            legend: {
+            show: false
+            },
+            grid: {
+            show: true,
+            position: 'back',
+            xaxis: {
+                lines: {
+                    show: true
+                }
+            },
+            padding: {
+                top: 0,
+                right: 10,
+                bottom: 0,
+                left: 10
+            }, 
+            yaxis: {
+                lines: {
+                    show: false
+                }
+            },            
+            },
+            markers: {
+            size: 4,
+            discrete: [{
+                seriesIndex: 0,
+                dataPointIndex: 5,
+                fillColor: "#FFF",
+                strokeColor: "#fbbc05",
+                size: 6
+            }]
+            },
+            yaxis: {
+                show: false,
+                min: 0
+            },
+            colors: ['#FBBC05'],
+            fill: {
+                colors: ['#FBBC05']
+            },
+            tooltip: {
+                enabled: true,
+                shared: true,
+                followCursor: true,
+            },
+            series: [
+                {
+                    name: 'Total',
+                    // data: [900,1100,1000,1300,1500,1800,1600,1900,2000,1800,2000,2300]
+                    data:n.Total
+                }
+            ],
+        })).render();
+    }
+
     
     return false;
 })
