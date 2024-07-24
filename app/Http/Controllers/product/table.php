@@ -23,7 +23,8 @@ class table extends Controller
                 'p.id', 'p.code', 'p.name', 'p.quantity', 'p.price', 'p.description', 'p.images', 'p.created_at'
             )
             ->where([
-                ['p.name', 'LIKE', $src]
+                ['p.name', 'LIKE', $src],
+                ['p.status', '=', 1]
             ]);
 
             $countData = $getData->count();

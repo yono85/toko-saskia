@@ -638,9 +638,16 @@
                                                 </a> -->
 
                                                 <a class="dropdown-item cmd-modal-widget color-orange" data-toggle="modal" data-target="#modal-product" data-type="edit" href="#" role="off">
-                                                        <span>Sunting</span>
-                                                        <span class="ic sli_icon-pencil"></span>
-                                                    </a>
+                                                    <span>Sunting</span>
+                                                    <span class="ic sli_icon-pencil"></span>
+                                                </a>
+
+                                                <div class="dropdown-divider"></div>
+
+                                                <a class="dropdown-item cmd-modal-widget color-red" data-toggle="modal" data-target="#modal-delete"  href="#" role="off">
+                                                    <span>Hapus</span>
+                                                    <span class="ic sli_icon-trash"></span>
+                                                </a>
 
                                             </div>
 
@@ -661,8 +668,14 @@
 </div>
 
 @include('modals.product')
+@include('modals.delete')
 
 <script>
+function loadTable()
+{
+    $('#form-table').submit();
+}
+
 $(document).ready(function(){
 
     $('#form-table').submit(function(){
@@ -739,15 +752,9 @@ $(document).ready(function(){
         y.html(list);
 
     }
-
-    function loadtable()
-    {
-        $('#form-table').submit();
-    }
-
+    
     // call load table
-    loadtable();
-
+    loadTable();
 
     $("body").on("click", ".cmd-modal-widget[data-target='#modal-payment']", function(){
         var $button = $(this),
@@ -757,6 +764,22 @@ $(document).ready(function(){
             console.log($orderCode);
             $modal.find("*[name='order_code']").val($orderCode);
             $modal.find("*[name='openpage']").val('table');
+    });
+
+    $("body").on("click", ".cmd-modal-widget[data-target='#modal-delete']", function(){
+        var $button = $(this),
+        $token = $button.parents(".tr").attr("data-token"),
+        $modal = $($button.attr("data-target")),
+        $form = $modal.find("form");
+
+        // var $field;
+        var $field = '<input type="hidden" name="code" value="'+$token+'" />';
+        $field += '<input type="hidden" name="function" value="loadTable" />';
+
+        // $form.remove();
+        // $modal.append('<form method="POST"></form>');
+        $modal.find("form").attr("action", CONFIG.APP.URL + "/api/product/delete");
+        $modal.find("form").html($field);
 
     });
 

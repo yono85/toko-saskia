@@ -119,4 +119,33 @@ class manage extends Controller
 
         return $filePath . '/' . $fileName;
     }
+
+    // DELETE
+    public function deleteProduct(Request $request){
+        try{
+
+            $delete = tblProducts::where([
+                'code'        =>  trim($request->code)
+            ])
+            ->update([
+                'status'    =>  0
+        ]);
+
+
+            $data = [
+                'message'   =>  'Produk berhasil dihapus',
+                'code'      =>  200
+            ];
+
+            return response()->json($data, 200);
+        }
+        catch(Exception $error){
+            $data = [
+                'message'   =>  $error->getMessage(),
+                'code'      =>  500
+            ];
+
+            return response()->json($data, 500);
+        }
+    }
 }

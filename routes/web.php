@@ -83,6 +83,7 @@ Route::group(['prefix' => '/api'], function() use ($root)
     Route::get('/product/table', $root . '\product\table@main');
     Route::get('/product/view', $root . '\product\index@view');
     Route::post('/product/create', $root . '\product\manage@main');
+    Route::post('/product/delete', $root . '\product\manage@deleteProduct');
     
 
     // DASHBOARD
