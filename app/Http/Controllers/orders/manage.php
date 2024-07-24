@@ -411,7 +411,7 @@ class manage extends Controller
                     'code'      =>  $code
                 ])
                 ->update([
-                    'status'    =>  1
+                    'status'    =>  0
                 ]);
             }
 
