@@ -50,6 +50,7 @@ class manage extends Controller
             $Create->price = trim($request->price);
             $Create->description = trim($request->description);
             $Create->images = $this->upload($request);
+            $Create->status = 1;
             $Create->save();
 
             $data = [
