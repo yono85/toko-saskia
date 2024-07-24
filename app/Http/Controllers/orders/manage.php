@@ -185,18 +185,21 @@ class manage extends Controller
                 ]);
             }
 
-            // UPDATE TOTAL ORDERS
-            $subTotal = tblOrderItems::where([
-                'order_code'        =>  $checkOrders->code,
-                'status'            =>  1
-            ])->sum("total");
+            // THIS FOR UPDATE TOTAL
+            $updateTotal = $this->updateTotalOrders($checkOrders->codde);
 
-            $updateOrders = tblOrders::where([
-                'code'        =>  $checkOrders->code
-            ])->update([
-                'subtotal'      =>  $subTotal,
-                'total'         =>  $subTotal
-            ]);
+            // UPDATE TOTAL ORDERS
+            // $subTotal = tblOrderItems::where([
+            //     'order_code'        =>  $checkOrders->code,
+            //     'status'            =>  1
+            // ])->sum("total");
+
+            // $updateOrders = tblOrders::where([
+            //     'code'        =>  $checkOrders->code
+            // ])->update([
+            //     'subtotal'      =>  $subTotal,
+            //     'total'         =>  $subTotal
+            // ]);
 
             $data = [
                 'message'   =>  'success'
@@ -213,6 +216,25 @@ class manage extends Controller
             return $data;
         }
         
+    }
+
+    //
+    public function updateTotalOrders($request){
+        // UPDATE TOTAL ORDERS
+        $code = $request;
+
+        $subTotal = tblOrderItems::where([
+            'order_code'        =>  $code,
+            'status'            =>  1
+        ])->sum("total");
+
+        $updateOrders = tblOrders::where([
+            'code'        =>  $code
+        ])->update([
+            'subtotal'      =>  $subTotal,
+            'total'         =>  $subTotal
+        ]);
+
     }
 
     //
@@ -345,6 +367,61 @@ class manage extends Controller
                 'message'   =>  'Data berhasil diproses',
                 'code'      =>  200,
                 'data'      =>  ''
+            ];
+
+            return response()->json($data, 200);
+        }
+        catch(Exception $error){
+            $data = [
+                'message'   =>  $error->getMessage(),
+                'code'      =>  500
+            ];
+
+            return response()->json($data, 500);
+        }
+    }
+
+    // delete items cart
+    public function deleteItem(Request $request){
+        try{
+            $item_id = trim($request->item_id);
+            $code = trim($request->code);
+
+            //
+            $deleteItem = tblOrderItems::where([
+                'id'        =>  $item_id
+            ])
+            ->update([
+                'status'    =>  0
+            ]);
+
+
+            // update total
+            $updateTotal = $this->updateTotalOrders($code);
+
+            // update orders or remove
+            $checkItem = tblOrderItems::where([
+                'order_code'    =>  $code,
+                'status'        =>  1
+            ])->count();
+
+
+            if($checkItem == 0){
+                $deleteOrder = tblOrders::where([
+                    'code'      =>  $code
+                ])
+                ->update([
+                    'status'    =>  1
+                ]);
+            }
+
+
+            $data = [
+                'message'       =>  'Data berhasil dihapus',
+                'code'          =>  200,
+                'data'          =>  [
+                    'redirect'      =>  $checkItem === 0 ? "true":"false"
+                ]
             ];
 
             return response()->json($data, 200);

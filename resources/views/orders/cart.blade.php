@@ -63,8 +63,9 @@
 
                                 @foreach($orders['items'] as $row)
                                 
-                                <div class="px-4 py-3 rounded-lg list-item" style="background-color: #f1f5f9; ">
-                                    <div class="product-box mx-0 " data-city-name="Jakarta Pusat (Kota)">
+                                <div class="px-4 py-3 rounded-lg list-item" style="background-color: #f1f5f9; "  data-id="{{$row->id}}" data-code="{{$orders['code']}}">
+                                
+                                    <div class="product-box mx-0 ">
                                         <div class="product-item-group bg-transparent mb-0">
                                             <div class="group-body">
                                                 <div class="product-item px-0" data-product-type="digital">
@@ -214,7 +215,7 @@
         </div>
 
         <!-- end delete product confirmation -->
-        <div class="container container-mobile" style="max-width: 420px">
+        <div class="container container-mobile" id="modal-delete-item" style="max-width: 420px">
             <div class="product-cart-body">
 
                 <div class="product-bar" >
@@ -252,8 +253,15 @@
                 
                 <div class="d-flex rounded-bottom overflow-hidden">
                     <button class="btn bg-light cancel flex-1 w-50 rounded-0 text-inherit" type="button">Batal</button>
-                    <button class="btn btn-danger cancel flex-1 w-50 rounded-0" type="button">Hapus</button>
+                    <button class="btn btn-danger flex-1 w-50 rounded-0 is-loading modal-submit" role="off" type="button">Hapus</button>
                 </div>
+
+                <form action="/api/orders/delete/item" method="POST" id="form-delete">
+                    <input type="hidden" name="item_id" value="" class="txt-def-empty">
+                    <input type="hidden" name="code" value="" class="txt-def-empty">
+                    <input type="hidden" name="uid" value="{{$account['id']}}">
+                    @csrf()
+                </form>
 
             </div>
         </div>
@@ -262,22 +270,17 @@
 
     <div class="product-cart-overlay product-cart-checkout-overlay"></div>
 
-
     <script src="https://utas.me/assets/3rd-party/js/sweetalert2.all.min.js"></script>
-    <!-- <script src="https://utas.me/assets/3rd-party/js/jquery.min.js"></script> -->
-    <!-- <script src="/js/js10.js"></script> -->
-    
     <script src="https://utas.me/assets/js/utility.js?v=2023.09.30"></script>
     <script src="https://utas.me/assets/js/app.js?v=2024.01.22" type="module"></script>
 
     <script src="/js/globals.js"></script>
+    <script src="/assets/js/global.js"></script>
 
-    
     <script>
         $(document).ready(function(){
 
             $("#form-cart").submit(function(e){
-
 
                 var $form = $(this),
                 $button = $form.find("button[type='submit']");
@@ -316,12 +319,54 @@
 
             $("body").on("click", "button.btn-add-checkout", function(e){
                 e.preventDefault();
+                var $button = $(this),
+                $item_id = $button.parents(".list-item").attr("data-id"),
+                $code = $button.parents(".list-item").attr("data-code");
 
+                $("#form-delete").find("*[name='item_id']").val($item_id);
+                $("#form-delete").find("*[name='code']").val($code);
+
+                // console.log($id);
             })
+
+            $("#modal-delete-item button.modal-submit").click(function(e){
+                e.preventDefault();
+                var $button = $(this),
+                $modal = $button.parents("#modal-delete-item"),
+                $form = $modal.find("form"),
+                $item = $("body").find(".list-item[data-id='"+$form.find("*[name='item_id']").val()+"']");
+
+                if($button.attr("role") === "off"){
+                    $button.attr("role", "on");
+
+                    // SUBMIT
+                    console.log("submot");
+
+                    var $t = ajaxFormRequest($form);
+                    $t.success(function(n){
+                        console.log(n);
+                        var $data = n.data;
+                        $modal.find(".cancel").click();
+                        $item.remove();
+                        $button.attr("role", "off");
+
+                        if( $data.redirect === "true"){
+                            location.href = "/";
+                        }
+                        
+                        flagnotif("success", n.message);
+                    })
+                    .error(function(n){
+                        console.log(n);
+                        $button.attr("role", "off");
+                        flagnotif("error", n.responseJSON.message);
+                    });
+                }
+            })
+
             return false;
         })
 
-        
     </script>
 </body>
 </html>
